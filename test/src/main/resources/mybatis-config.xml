@@ -16,7 +16,7 @@
             <dataSource type="POOLED">
                 <!--这里面的name是不能更改的，这是别人定义的名字-->
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/ruoyi-vue"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/ruoyi_vue"/>
                 <property name="username" value="root"/>
                 <property name="password" value="123456"/>
             </dataSource>
