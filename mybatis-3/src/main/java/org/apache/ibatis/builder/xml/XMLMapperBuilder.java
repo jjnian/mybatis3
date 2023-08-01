@@ -57,6 +57,7 @@ public class XMLMapperBuilder extends BaseBuilder {
 
   private final XPathParser parser;
   private final MapperBuilderAssistant builderAssistant;
+  // 记录mapper文件下的SQL标签
   private final Map<String, XNode> sqlFragments;
   private final String resource;
 
@@ -96,12 +97,17 @@ public class XMLMapperBuilder extends BaseBuilder {
   }
 
   public void parse() {
+    // 是否加载过该mapper.xml文件
     if (!configuration.isResourceLoaded(resource)) {
+      // 解析mapper.xml文件里的各种标签
       configurationElement(parser.evalNode("/mapper"));
+      // 加载mapper文件到已经加载的列表中
       configuration.addLoadedResource(resource);
+      // 绑定mapper对应的接口类
       bindMapperForNamespace();
     }
 
+    // 继续解析没完成的标签
     parsePendingResultMaps();
     parsePendingCacheRefs();
     parsePendingStatements();
@@ -118,11 +124,17 @@ public class XMLMapperBuilder extends BaseBuilder {
         throw new BuilderException("Mapper's namespace cannot be empty");
       }
       builderAssistant.setCurrentNamespace(namespace);
+      // 解析cache-ref标签
       cacheRefElement(context.evalNode("cache-ref"));
+      // 解析cache标签
       cacheElement(context.evalNode("cache"));
+      // 解析mapper文件下的parameterMap
       parameterMapElement(context.evalNodes("/mapper/parameterMap"));
+      // 解析mapper文件下的resultMap标签
       resultMapElements(context.evalNodes("/mapper/resultMap"));
+      // 解析mapper文件下的SQL标签
       sqlElement(context.evalNodes("/mapper/sql"));
+      // 解析SQL的四个标签类
       buildStatementFromContext(context.evalNodes("select|insert|update|delete"));
     } catch (Exception e) {
       throw new BuilderException("Error parsing Mapper XML. The XML location is '" + resource + "'. Cause: " + e, e);
@@ -206,6 +218,13 @@ public class XMLMapperBuilder extends BaseBuilder {
     }
   }
 
+  /**
+   * 处理mapper文件下的cache标签里面的属性
+   *
+   * @Date 2023/8/1 20:00
+   *
+   * @param context
+   */
   private void cacheElement(XNode context) {
     if (context != null) {
       String type = context.getStringAttribute("type", "PERPETUAL");
@@ -441,7 +460,9 @@ public class XMLMapperBuilder extends BaseBuilder {
         // Spring may not know the real resource name so we set a flag
         // to prevent loading again this resource from the mapper interface
         // look at MapperAnnotationBuilder#loadXmlResource
+        // 记录已经加载接口类
         configuration.addLoadedResource("namespace:" + namespace);
+        // 存放接口类
         configuration.addMapper(boundType);
       }
     }

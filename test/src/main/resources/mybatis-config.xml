@@ -25,7 +25,7 @@
 
     <!--在主配置文件中关联mapper sql映射文件-->
     <mappers>
-        <mapper resource="cn.clean.mapper.UserMapper.xml"></mapper>
+        <mapper resource="mybatis/UserMapper.xml"></mapper>
     </mappers>
 
 </configuration>

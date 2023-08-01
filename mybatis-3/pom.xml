@@ -168,7 +168,7 @@
       <artifactId>javassist</artifactId>
       <version>3.29.2-GA</version>
       <scope>compile</scope>
-      <optional>true</optional>
+      <!--<optional>true</optional>-->
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -350,10 +350,10 @@
           </systemPropertyVariables>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pdf-plugin</artifactId>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-pdf-plugin</artifactId>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
