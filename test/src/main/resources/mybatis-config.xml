@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!--配置数据库环境-->
+    <!--default="dev", 这default指的是默认的数据库，
+     当environments中有多个数据源时，指定那个数据源为默认的。
+    -->
+    <environments default="dev">
+        <!--        可以配置多数据源 -->
+        <environment id="dev">
+            <!--事务管理，目前交给JDBC管理-->
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <!--这里面的name是不能更改的，这是别人定义的名字-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/ruoyi-vue"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--在主配置文件中关联mapper sql映射文件-->
+    <mappers>
+        <mapper resource="cn.clean.mapper.UserMapper.xml"></mapper>
+    </mappers>
+
+</configuration>
