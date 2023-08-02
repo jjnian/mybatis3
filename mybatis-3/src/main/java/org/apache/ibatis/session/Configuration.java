@@ -732,6 +732,7 @@ public class Configuration {
     } else {
       executor = new SimpleExecutor(this, transaction);
     }
+    // 如果开启二级缓存生成CachingExecutor执行器
     if (cacheEnabled) {
       executor = new CachingExecutor(executor);
     }
