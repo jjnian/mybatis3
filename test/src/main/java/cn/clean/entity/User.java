@@ -4,42 +4,31 @@ package cn.clean.entity;
  *
  */
 public class User {
-	private Integer userId;
+	private Integer id;
 
-	private String userName;
+	private String name;
 
-	private String nickName;
-
-	public Integer getUserId() {
-		return userId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
 		return "User{" +
-				"userId=" + userId +
-				", userName='" + userName + '\'' +
-				", nickName='" + nickName + '\'' +
+				"id=" + id +
+				", name='" + name + '\'' +
 				'}';
 	}
 }
