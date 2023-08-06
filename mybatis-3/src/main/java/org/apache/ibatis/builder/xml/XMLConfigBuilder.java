@@ -95,6 +95,15 @@ public class XMLConfigBuilder extends BaseBuilder {
     this(configClass, new XPathParser(inputStream, true, props, new XMLMapperEntityResolver()), environment, props);
   }
 
+  /**
+   * 创建XMLConfigBuilder的时候进行初始化
+   * @Date 2023/8/5 11:53
+   * @param configClass
+   * @param parser
+   * @param environment
+   * @param props
+   * @return {@link null }
+   */
   private XMLConfigBuilder(Class<? extends Configuration> configClass, XPathParser parser, String environment,
       Properties props) {
     super(newConfig(configClass));
@@ -105,6 +114,11 @@ public class XMLConfigBuilder extends BaseBuilder {
     this.parser = parser;
   }
 
+  /**
+   * 开始解析XML文件
+   * @Date 2023/8/5 11:53
+   * @return {@link Configuration }
+   */
   public Configuration parse() {
     if (parsed) {
       throw new BuilderException("Each XMLConfigBuilder can only be used once.");
@@ -114,6 +128,11 @@ public class XMLConfigBuilder extends BaseBuilder {
     return configuration;
   }
 
+  /**
+   * 真正的解析方法
+   * @Date 2023/8/5 11:53
+   * @param root
+   */
   private void parseConfiguration(XNode root) {
     try {
       // issue #117 read properties first
@@ -125,6 +144,7 @@ public class XMLConfigBuilder extends BaseBuilder {
       typeAliasesElement(root.evalNode("typeAliases"));
 
       // 处理插件
+      // 实例化拦截器然后加入到Configuration中
       pluginElement(root.evalNode("plugins"));
       objectFactoryElement(root.evalNode("objectFactory"));
       objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
