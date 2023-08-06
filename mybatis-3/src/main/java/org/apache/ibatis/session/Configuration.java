@@ -176,6 +176,10 @@ public class Configuration {
 
   protected final Collection<XMLStatementBuilder> incompleteStatements = new LinkedList<>();
   protected final Collection<CacheRefResolver> incompleteCacheRefs = new LinkedList<>();
+
+  // 存放Mapper.xml中的ResultMap标签
+  // 每一个ResultMap标签里面的子标签在一个List
+  // 里面有几个ResultMap就会有几个list
   protected final Collection<ResultMapResolver> incompleteResultMaps = new LinkedList<>();
   protected final Collection<MethodResolver> incompleteMethods = new LinkedList<>();
 

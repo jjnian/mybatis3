@@ -63,7 +63,7 @@ public class Main {
 		SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
 		SqlSession sqlSession = ssf.openSession();
 		CloudUserMapper mapper = sqlSession.getMapper(CloudUserMapper.class);
-		CloudUser user = mapper.getSysUser();
+		CloudUser user = mapper.getSysUser(0,"ji");
 		System.out.println(user.toString());
 	}
 

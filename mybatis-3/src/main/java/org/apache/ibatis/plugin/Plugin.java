@@ -31,7 +31,10 @@ import org.apache.ibatis.util.MapUtil;
  */
 public class Plugin implements InvocationHandler {
 
+  // 被代理类
   private final Object target;
+
+  // 拦截器
   private final Interceptor interceptor;
   private final Map<Class<?>, Set<Method>> signatureMap;
 
@@ -44,6 +47,7 @@ public class Plugin implements InvocationHandler {
   public static Object wrap(Object target, Interceptor interceptor) {
     Map<Class<?>, Set<Method>> signatureMap = getSignatureMap(interceptor);
     Class<?> type = target.getClass();
+    // 找出需要代理的类
     Class<?>[] interfaces = getAllInterfaces(type, signatureMap);
     if (interfaces.length > 0) {
       return Proxy.newProxyInstance(type.getClassLoader(), interfaces, new Plugin(target, interceptor, signatureMap));
@@ -56,6 +60,7 @@ public class Plugin implements InvocationHandler {
     try {
       Set<Method> methods = signatureMap.get(method.getDeclaringClass());
       if (methods != null && methods.contains(method)) {
+        // 调用代理类的intercept，然后在Invocation类里面调用原来类的方法
         return interceptor.intercept(new Invocation(target, method, args));
       }
       return method.invoke(target, args);

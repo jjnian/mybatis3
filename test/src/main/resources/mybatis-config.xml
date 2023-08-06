@@ -4,6 +4,9 @@
 
 <configuration>
 
+    <plugins>
+        <plugin interceptor="cn.clean.plugin.MyPlugin"></plugin>
+    </plugins>
     <!--配置数据库环境-->
     <!--default="dev", 这default指的是默认的数据库，
      当environments中有多个数据源时，指定那个数据源为默认的。
