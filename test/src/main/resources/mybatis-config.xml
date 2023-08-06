@@ -16,9 +16,9 @@
             <dataSource type="POOLED">
                 <!--这里面的name是不能更改的，这是别人定义的名字-->
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/ry"/>
                 <property name="username" value="root"/>
-                <property name="password" value="123456"/>
+                <property name="password" value="12345678"/>
             </dataSource>
         </environment>
     </environments>
@@ -26,6 +26,7 @@
     <!--在主配置文件中关联mapper sql映射文件-->
     <mappers>
         <mapper resource="mybatis/UserMapper.xml"></mapper>
+        <mapper resource="mybatis/SysUserMapper.xml"></mapper>
     </mappers>
 
 </configuration>
