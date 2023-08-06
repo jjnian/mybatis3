@@ -54,11 +54,15 @@ import org.apache.ibatis.type.TypeHandler;
  * @author Kazuki Shimizu
  */
 public class XMLMapperBuilder extends BaseBuilder {
-
+  // mapper.xml文件的解析器
   private final XPathParser parser;
+
   private final MapperBuilderAssistant builderAssistant;
+
   // 记录mapper文件下的SQL标签
   private final Map<String, XNode> sqlFragments;
+
+  // mapper.xml文件的资源路径
   private final String resource;
 
   @Deprecated
@@ -103,7 +107,7 @@ public class XMLMapperBuilder extends BaseBuilder {
       configurationElement(parser.evalNode("/mapper"));
       // 加载mapper文件到已经加载的列表中
       configuration.addLoadedResource(resource);
-      // 绑定mapper对应的接口类
+      // 加载namespace对应的类到MapperRegister
       bindMapperForNamespace();
     }
 
