@@ -144,6 +144,7 @@ public class XMLConfigBuilder extends BaseBuilder {
       typeAliasesElement(root.evalNode("typeAliases"));
 
       // 处理插件
+      // 实例化拦截器然后加入到Configuration中
       pluginElement(root.evalNode("plugins"));
       objectFactoryElement(root.evalNode("objectFactory"));
       objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));

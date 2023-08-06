@@ -4,6 +4,11 @@
 
 <configuration>
 
+    <plugins>
+        <plugin interceptor="cn.clean.plugin.MyPlugin">
+            <property name="someProperty" value="100"/>
+        </plugin>
+    </plugins>
     <!--配置数据库环境-->
     <!--default="dev", 这default指的是默认的数据库，
      当environments中有多个数据源时，指定那个数据源为默认的。
@@ -16,9 +21,9 @@
             <dataSource type="POOLED">
                 <!--这里面的name是不能更改的，这是别人定义的名字-->
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/ry"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/test"/>
                 <property name="username" value="root"/>
-                <property name="password" value="12345678"/>
+                <property name="password" value="123456"/>
             </dataSource>
         </environment>
     </environments>

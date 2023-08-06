@@ -17,7 +17,7 @@ import java.io.Reader;
  */
 public class Main {
 	public static void main(String[] args) {
-		test1();
+		test();
 	}
 
 	public static void test(){
