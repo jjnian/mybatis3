@@ -108,6 +108,8 @@ public class ParamNameResolver {
   }
 
   /**
+   * 只有一个参数时并且没有带Param注解直接返回该参数
+   * 当有@Param注解或者多个参数时返回Map
    * <p>
    * A single non-special parameter is returned without a name. Multiple parameters are named using the naming rule. In
    * addition to the default names, this method also adds the generic names (param1, param2, ...).

@@ -4,4 +4,19 @@
     <select id="getSysUser" resultType="cn.clean.entity.CloudUser">
         select id,name,address from user where id  = #{id} and name = #{name}
     </select>
+
+    <select id="getSysUser1" resultType="cn.clean.entity.CloudUser">
+        select id,name,address from user where id  = #{cloudUser.id} and name = #{cloudUser.name}
+    </select>
+
+    <select id="getSysUser2" resultType="cn.clean.entity.CloudUser">
+        select id,name,address from user where id  = #{id} and name = #{name}
+    </select>
+
+    <select id="getSysUser3" resultType="cn.clean.entity.CloudUser">
+        select id,name,address from user where id in
+        <foreach collection="jiruixin" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

@@ -13,6 +13,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
  *
@@ -64,6 +67,60 @@ public class Main {
 		SqlSession sqlSession = ssf.openSession();
 		CloudUserMapper mapper = sqlSession.getMapper(CloudUserMapper.class);
 		CloudUser user = mapper.getSysUser(0,"ji");
+		System.out.println(user.toString());
+	}
+
+	public static void test3(){
+		Reader resourceAsReader = null;
+		try {
+			resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+		SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
+		SqlSession sqlSession = ssf.openSession();
+		CloudUserMapper mapper = sqlSession.getMapper(CloudUserMapper.class);
+		CloudUser cloudUser = new CloudUser();
+		cloudUser.setId(0);
+		cloudUser.setName("ji");
+		CloudUser user = mapper.getSysUser1(cloudUser);
+		System.out.println(user.toString());
+	}
+
+	public static void test4(){
+		Reader resourceAsReader = null;
+		try {
+			resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+		SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
+		SqlSession sqlSession = ssf.openSession();
+		CloudUserMapper mapper = sqlSession.getMapper(CloudUserMapper.class);
+		Map<String,Object> cloudUser = new HashMap<>();
+		cloudUser.put("id",0);
+		cloudUser.put("name","ji");
+		CloudUser user = mapper.getSysUser2(cloudUser);
+		System.out.println(user.toString());
+	}
+
+	public static void test5(){
+		Reader resourceAsReader = null;
+		try {
+			resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+		SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
+		SqlSession sqlSession = ssf.openSession();
+		CloudUserMapper mapper = sqlSession.getMapper(CloudUserMapper.class);
+		LinkedList<Integer> integers = new LinkedList<>();
+		integers.add(0);
+		integers.add(1);
+		CloudUser user = mapper.getSysUser3(integers);
 		System.out.println(user.toString());
 	}
 
