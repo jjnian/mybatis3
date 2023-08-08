@@ -14,4 +14,6 @@ public interface CloudUserMapper {
     CloudUser getSysUser2(Map map);
 
     CloudUser getSysUser3(@Param("jiruixin") List<Integer> list);
+
+    CloudUser getSysUser4(String userName, List<Object> list);
 }

@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class Main {
 	public static void main(String[] args) {
-		test2();
+		test6();
 	}
 
 	public static void test(){
@@ -121,6 +121,24 @@ public class Main {
 		integers.add(0);
 		integers.add(1);
 		CloudUser user = mapper.getSysUser3(integers);
+		System.out.println(user.toString());
+	}
+
+	public static void test6(){
+		Reader resourceAsReader = null;
+		try {
+			resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+		SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
+		SqlSession sqlSession = ssf.openSession();
+		CloudUserMapper mapper = sqlSession.getMapper(CloudUserMapper.class);
+		LinkedList<Object> integers = new LinkedList<>();
+		integers.add("1");
+		integers.add("0");
+		CloudUser user = mapper.getSysUser4("user",integers);
 		System.out.println(user.toString());
 	}
 
