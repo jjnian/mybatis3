@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class Main {
 	public static void main(String[] args) {
-		test6();
+		test1();
 	}
 
 	public static void test(){
