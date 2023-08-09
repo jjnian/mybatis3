@@ -1,4 +1,4 @@
-package cn.clean;
+package cn.clean.main;
 
 import cn.clean.entity.CloudUser;
 import cn.clean.entity.SysUser;
@@ -20,9 +20,9 @@ import java.util.Map;
 /**
  *
  */
-public class Main {
+public class WinMain {
 	public static void main(String[] args) {
-		test1();
+		test();
 	}
 
 	public static void test(){
@@ -37,21 +37,6 @@ public class Main {
 		SqlSession sqlSession = ssf.openSession();
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		User user = mapper.getUser();
-		System.out.println(user.toString());
-	}
-
-	public static void test1(){
-		Reader resourceAsReader = null;
-		try {
-			resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-		SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
-		SqlSession sqlSession = ssf.openSession();
-		SysUserMapper mapper = sqlSession.getMapper(SysUserMapper.class);
-		SysUser user = mapper.getSysUser();
 		System.out.println(user.toString());
 	}
 
