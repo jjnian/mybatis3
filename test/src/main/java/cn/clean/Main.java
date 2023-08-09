@@ -22,13 +22,13 @@ import java.util.Map;
  */
 public class Main {
 	public static void main(String[] args) {
-		test6();
+		test();
 	}
 
 	public static void test(){
 		Reader resourceAsReader = null;
 		try {
-			resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
+			resourceAsReader = Resources.getResourceAsReader("mybatis-config1.xml");
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
