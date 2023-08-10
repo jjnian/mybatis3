@@ -7,6 +7,7 @@ import cn.clean.mapper.CloudUserMapper;
 import cn.clean.mapper.SysUserMapper;
 import cn.clean.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -39,7 +40,7 @@ public class WinMain {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		//User user = mapper.getUser();
 		//User user = mapper.getUserByAnn();
-		List<User> user = mapper.getUsers();
+		List<User> user = mapper.getUsers(new RowBounds(0,1));
 		System.out.println(user.toString());
 	}
 

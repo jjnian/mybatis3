@@ -3,6 +3,7 @@ package cn.clean.main;
 import cn.clean.entity.SysUser;
 import cn.clean.mapper.SysUserMapper;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -59,7 +60,7 @@ public class MacMain {
         SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
         SqlSession sqlSession = ssf.openSession();
         SysUserMapper mapper = sqlSession.getMapper(SysUserMapper.class);
-        List<SysUser> user = mapper.getAllUser();
+        List<SysUser> user = mapper.getAllUser(new RowBounds(0,1));
         System.out.println(user.toString());
     }
 }
