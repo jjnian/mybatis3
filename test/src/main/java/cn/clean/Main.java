@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,7 +37,9 @@ public class Main {
 		SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
 		SqlSession sqlSession = ssf.openSession();
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		User user = mapper.getUser();
+		//User user = mapper.getUser();
+		//User user = mapper.getUserByAnn();
+		List<User> user = mapper.getUsers();
 		System.out.println(user.toString());
 	}
 

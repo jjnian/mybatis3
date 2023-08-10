@@ -16,6 +16,8 @@
 package org.apache.ibatis.session;
 
 /**
+ *
+ * 对查询结果做逻辑限制
  * @author Clinton Begin
  */
 public class RowBounds {
@@ -24,11 +26,16 @@ public class RowBounds {
   public static final int NO_ROW_LIMIT = Integer.MAX_VALUE;
   public static final RowBounds DEFAULT = new RowBounds();
 
+  // 数据的起止数
   private final int offset;
+
+  // 数据返回的行数
   private final int limit;
 
   public RowBounds() {
+    // 默认是0
     this.offset = NO_ROW_OFFSET;
+    // 默认是0x7fffffff
     this.limit = NO_ROW_LIMIT;
   }
 
