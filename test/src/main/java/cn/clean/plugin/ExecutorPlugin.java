@@ -1,6 +1,5 @@
 package cn.clean.plugin;
 
-import cn.clean.mapper.UserMapper;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -25,7 +24,7 @@ import org.apache.ibatis.session.RowBounds;
 			method = "query",
 			args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})
 })
-public class MyPlugin implements Interceptor {
+public class ExecutorPlugin implements Interceptor {
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
 		System.out.println("----------------------------------------------------");

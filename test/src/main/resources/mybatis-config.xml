@@ -5,7 +5,7 @@
 <configuration>
 
     <plugins>
-        <plugin interceptor="cn.clean.plugin.MyPlugin"></plugin>
+        <plugin interceptor="cn.clean.plugin.ExecutorPlugin"></plugin>
     </plugins>
     <!--配置数据库环境-->
     <!--default="dev", 这default指的是默认的数据库，
