@@ -194,6 +194,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
     int resultSetCount = 0;
     ResultSetWrapper rsw = getFirstResultSet(stmt);
 
+    // 获取ResultMap的属性
     List<ResultMap> resultMaps = mappedStatement.getResultMaps();
     int resultMapCount = resultMaps.size();
     validateResultMapsCount(rsw, resultMapCount);
@@ -205,6 +206,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
       resultSetCount++;
     }
 
+    // 获取select的resultSets属性
     String[] resultSets = mappedStatement.getResultSets();
     if (resultSets != null) {
       while (rsw != null && resultSetCount < resultSets.length) {
@@ -303,6 +305,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
         handleRowValues(rsw, resultMap, null, RowBounds.DEFAULT, parentMapping);
       } else if (resultHandler == null) {
         DefaultResultHandler defaultResultHandler = new DefaultResultHandler(objectFactory);
+        // 处理查询出来的ResultSet结果
         handleRowValues(rsw, resultMap, defaultResultHandler, rowBounds, null);
         multipleResults.add(defaultResultHandler.getResultList());
       } else {
@@ -352,6 +355,15 @@ public class DefaultResultSetHandler implements ResultSetHandler {
     }
   }
 
+  /**
+   * 循环处理ResultSet查询出来的每条数据
+   * @param rsw
+   * @param resultMap
+   * @param resultHandler
+   * @param rowBounds
+   * @param parentMapping
+   * @throws SQLException
+   */
   private void handleRowValuesForSimpleResultMap(ResultSetWrapper rsw, ResultMap resultMap,
       ResultHandler<?> resultHandler, RowBounds rowBounds, ResultMapping parentMapping) throws SQLException {
     DefaultResultContext<Object> resultContext = new DefaultResultContext<>();
@@ -359,7 +371,9 @@ public class DefaultResultSetHandler implements ResultSetHandler {
     skipRows(resultSet, rowBounds);
     while (shouldProcessMoreRows(resultContext, rowBounds) && !resultSet.isClosed() && resultSet.next()) {
       ResultMap discriminatedResultMap = resolveDiscriminatedResultMap(resultSet, resultMap, null);
+      // 获取转换完的数据
       Object rowValue = getRowValue(rsw, discriminatedResultMap, null);
+      // 储存转换完的数据
       storeObject(resultHandler, resultContext, rowValue, parentMapping, resultSet);
     }
   }
@@ -404,6 +418,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
 
   private Object getRowValue(ResultSetWrapper rsw, ResultMap resultMap, String columnPrefix) throws SQLException {
     final ResultLoaderMap lazyLoader = new ResultLoaderMap();
+    // 创建结果映射的对象
     Object rowValue = createResultObject(rsw, resultMap, lazyLoader, columnPrefix);
     if (rowValue != null && !hasTypeHandlerForResultObject(rsw, resultMap.getType())) {
       final MetaObject metaObject = configuration.newMetaObject(rowValue);
@@ -411,6 +426,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
       if (shouldApplyAutomaticMappings(resultMap, false)) {
         foundValues = applyAutomaticMappings(rsw, resultMap, metaObject, columnPrefix) || foundValues;
       }
+      // 把结果映射到对象中
       foundValues = applyPropertyMappings(rsw, resultMap, metaObject, lazyLoader, columnPrefix) || foundValues;
       foundValues = lazyLoader.size() > 0 || foundValues;
       rowValue = foundValues || configuration.isReturnInstanceForEmptyRow() ? rowValue : null;
@@ -474,6 +490,16 @@ public class DefaultResultSetHandler implements ResultSetHandler {
   // PROPERTY MAPPINGS
   //
 
+  /**
+   * 把SQl查询的结果映射到创建的对象中
+   * @param rsw
+   * @param resultMap
+   * @param metaObject
+   * @param lazyLoader
+   * @param columnPrefix
+   * @return
+   * @throws SQLException
+   */
   private boolean applyPropertyMappings(ResultSetWrapper rsw, ResultMap resultMap, MetaObject metaObject,
       ResultLoaderMap lazyLoader, String columnPrefix) throws SQLException {
     final List<String> mappedColumnNames = rsw.getMappedColumnNames(resultMap, columnPrefix);

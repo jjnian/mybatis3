@@ -34,8 +34,11 @@ import org.apache.ibatis.session.Configuration;
  */
 public class BoundSql {
 
+  // SQl语句
   private final String sql;
+  // SQL中的参数
   private final List<ParameterMapping> parameterMappings;
+  // 给SQL传的参数
   private final Object parameterObject;
   private final Map<String, Object> additionalParameters;
   private final MetaObject metaParameters;

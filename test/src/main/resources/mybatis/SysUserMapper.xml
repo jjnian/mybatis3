@@ -4,4 +4,17 @@
     <select id="getSysUser" resultType="cn.clean.entity.SysUser">
         select id,nickname from user where id  = 14
     </select>
+
+    <resultMap id="user" type="cn.clean.entity.SysUser">
+        <result column="aid" property="id"/>
+        <result column="aname" property="nickname"/>
+    </resultMap>
+
+    <select id="getUser" resultMap="user">
+        select id aid, nickname aname from user where id = 14
+    </select>
+
+    <select id="getAllUser" resultMap="user">
+        select id aid, nickname aname from user
+    </select>
 </mapper>
