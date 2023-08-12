@@ -57,6 +57,7 @@ public class XMLMapperBuilder extends BaseBuilder {
   // mapper.xml文件的解析器
   private final XPathParser parser;
 
+  // Mapper.xml文件构建助手
   private final MapperBuilderAssistant builderAssistant;
 
   // 记录mapper文件下的SQL标签
