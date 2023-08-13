@@ -16,7 +16,7 @@ public class MacMain {
     static final String config = "mybatis-config.xml";
 
     public static void main(String[] args) {
-        test3();
+        test4();
     }
 
     public static void test1(){
@@ -61,6 +61,21 @@ public class MacMain {
         SqlSession sqlSession = ssf.openSession();
         SysUserMapper mapper = sqlSession.getMapper(SysUserMapper.class);
         List<SysUser> user = mapper.getAllUser(new RowBounds(0,1));
+        System.out.println(user.toString());
+    }
+
+    public static void test4(){
+        Reader resourceAsReader = null;
+        try {
+            resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
+        SqlSession sqlSession = ssf.openSession();
+        SysUserMapper mapper = sqlSession.getMapper(SysUserMapper.class);
+        SysUser user = mapper.getUserById();
         System.out.println(user.toString());
     }
 }
