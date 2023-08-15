@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class WinMain {
 	public static void main(String[] args) {
-		test5();
+		test3();
 	}
 
 	public static void test(){
