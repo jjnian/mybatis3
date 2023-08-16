@@ -115,6 +115,7 @@ public class MapperAnnotationBuilder {
   public void parse() {
     String resource = type.toString();
     if (!configuration.isResourceLoaded(resource)) {
+      // 加载对应的XML文件
       loadXmlResource();
       configuration.addLoadedResource(resource);
       assistant.setCurrentNamespace(type.getName());
@@ -163,6 +164,7 @@ public class MapperAnnotationBuilder {
     // to prevent loading again a resource twice
     // this flag is set at XMLMapperBuilder#bindMapperForNamespace
     if (!configuration.isResourceLoaded("namespace:" + type.getName())) {
+      // 加载同目录下同名字的.xml文件
       String xmlResource = type.getName().replace('.', '/') + ".xml";
       // #1347
       InputStream inputStream = type.getResourceAsStream("/" + xmlResource);

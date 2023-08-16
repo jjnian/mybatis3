@@ -67,6 +67,7 @@ public class SimpleExecutor extends BaseExecutor {
       // 并且参数都已经设置好
       stmt = prepareStatement(handler, ms.getStatementLog());
       // 执行查询
+      // 结果映射
       return handler.query(stmt, resultHandler);
     } finally {
       closeStatement(stmt);
