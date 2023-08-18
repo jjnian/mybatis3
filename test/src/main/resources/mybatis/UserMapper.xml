@@ -4,4 +4,9 @@
     <select id="getUser" resultType="cn.clean.entity.User">
         select * from test2 where id  = '1'
     </select>
+
+    <select id="getUser" >
+        select * from test2 where id  = '1'
+        select * from test2 where id  = '2'
+    </select>
 </mapper>

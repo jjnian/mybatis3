@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.clean.mapper.CloudUserMapper">
-    <select id="getSysUser" parameterType="java.util.List" resultType="cn.clean.entity.CloudUser">
-        select id,name,address from user where id  = #{id} and name = #{name}
+    <select id="getSysUser" resultMap="user1,user2" resultSets="user1,user2">
+        select id,name from test2 where id  = #{id} and name = #{name}
     </select>
 
     <select id="getSysUser1" parameterType="java.util.List" resultType="cn.clean.entity.CloudUser">
@@ -32,4 +32,11 @@
             #{id}
         </foreach>
     </select>
+
+    <resultMap id="user1" type="cn.clean.entity.User">
+
+    </resultMap>
+    <resultMap id="user2" type="cn.clean.entity.User">
+
+    </resultMap>
 </mapper>
