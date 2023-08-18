@@ -97,12 +97,15 @@ public class SqlSessionFactoryBean
   private static final ResourcePatternResolver RESOURCE_PATTERN_RESOLVER = new PathMatchingResourcePatternResolver();
   private static final MetadataReaderFactory METADATA_READER_FACTORY = new CachingMetadataReaderFactory();
 
+  // 配置文件的路径
   private Resource configLocation;
 
   private Configuration configuration;
 
+  // mapper.xml文件的路径
   private Resource[] mapperLocations;
 
+  // 数据源
   private DataSource dataSource;
 
   private TransactionFactory transactionFactory;

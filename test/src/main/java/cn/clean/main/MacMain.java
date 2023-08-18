@@ -10,6 +10,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 public class MacMain {
@@ -77,5 +80,9 @@ public class MacMain {
         SysUserMapper mapper = sqlSession.getMapper(SysUserMapper.class);
         SysUser user = mapper.getUserById();
         System.out.println(user.toString());
+
+        Connection connection = DriverManager.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement();
+        preparedStatement.getMoreResults()
     }
 }
