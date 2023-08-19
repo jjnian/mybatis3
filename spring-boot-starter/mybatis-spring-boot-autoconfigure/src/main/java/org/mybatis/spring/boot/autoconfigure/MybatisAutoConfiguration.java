@@ -133,6 +133,12 @@ public class MybatisAutoConfiguration implements InitializingBean {
     }
   }
 
+  /**
+   * 生成SqlSessionFactory
+   * @Date 2023/8/19 9:59
+   * @param dataSource
+   * @return {@link SqlSessionFactory }
+   */
   @Bean
   @ConditionalOnMissingBean
   public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
