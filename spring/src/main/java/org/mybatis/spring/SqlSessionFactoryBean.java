@@ -100,6 +100,7 @@ public class SqlSessionFactoryBean
   // 配置文件的路径
   private Resource configLocation;
 
+  // 配置文件生成的配置类
   private Configuration configuration;
 
   // mapper.xml文件的路径
@@ -674,6 +675,7 @@ public class SqlSessionFactoryBean
 
     if (xmlConfigBuilder != null) {
       try {
+        // 解析配置文件
         xmlConfigBuilder.parse();
         LOGGER.debug(() -> "Parsed configuration file: '" + this.configLocation + "'");
       } catch (Exception ex) {
@@ -691,6 +693,7 @@ public class SqlSessionFactoryBean
       if (this.mapperLocations.length == 0) {
         LOGGER.warn(() -> "Property 'mapperLocations' was specified but matching resources are not found.");
       } else {
+        // 遍历Mapper.xml文件
         for (Resource mapperLocation : this.mapperLocations) {
           if (mapperLocation == null) {
             continue;
