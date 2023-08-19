@@ -16,6 +16,7 @@
   <modules>
     <module>mybatis-3</module>
     <module>spring</module>
+    <module>spring-boot-starter</module>
     <module>parent</module>
     <module>test</module>
   </modules>
