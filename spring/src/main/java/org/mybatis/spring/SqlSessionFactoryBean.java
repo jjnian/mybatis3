@@ -569,7 +569,7 @@ public class SqlSessionFactoryBean
   }
 
   /**
-   * {@inheritDoc}
+   *  创建完SqlSessionFactoryBean之后会调用这个方法
    */
   @Override
   public void afterPropertiesSet() throws Exception {
@@ -578,6 +578,7 @@ public class SqlSessionFactoryBean
     state((configuration == null && configLocation == null) || !(configuration != null && configLocation != null),
         "Property 'configuration' and 'configLocation' can not specified with together");
 
+    // 创建SqlSessionFactory
     this.sqlSessionFactory = buildSqlSessionFactory();
   }
 
@@ -699,6 +700,7 @@ public class SqlSessionFactoryBean
             continue;
           }
           try {
+            // 解析Mappeer.xml文件
             XMLMapperBuilder xmlMapperBuilder = new XMLMapperBuilder(mapperLocation.getInputStream(),
                 targetConfiguration, mapperLocation.toString(), targetConfiguration.getSqlFragments());
             xmlMapperBuilder.parse();
