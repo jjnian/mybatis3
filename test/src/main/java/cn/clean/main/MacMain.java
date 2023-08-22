@@ -10,16 +10,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 public class MacMain {
     static final String config = "mybatis-config.xml";
 
     public static void main(String[] args) {
-        test4();
+        test1();
     }
 
     public static void test1(){
@@ -80,9 +77,13 @@ public class MacMain {
         SysUserMapper mapper = sqlSession.getMapper(SysUserMapper.class);
         SysUser user = mapper.getUserById();
         System.out.println(user.toString());
+    }
 
-        Connection connection = DriverManager.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement();
-        preparedStatement.getMoreResults()
+    public static void test5(){
+        System.out.println(MacMain.class.getClassLoader().getResource("").getPath());
+        System.out.println(ClassLoader.getSystemClassLoader());
+        System.out.println(Thread.currentThread().getContextClassLoader());
+        // System.out.println(System.getProperty("java.class.path"));
+        // System.out.println(MacMain.class.getClassLoader().getParent().getResource("").getPath());
     }
 }

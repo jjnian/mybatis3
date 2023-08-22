@@ -101,11 +101,12 @@ public class XMLConfigBuilder extends BaseBuilder {
    * @param configClass
    * @param parser
    * @param environment
-   * @param props
+   * @param props 外部的Properties的文件
    * @return {@link null }
    */
   private XMLConfigBuilder(Class<? extends Configuration> configClass, XPathParser parser, String environment,
       Properties props) {
+    // 创建Configuration
     super(newConfig(configClass));
     ErrorContext.instance().resource("SQL Mapper Configuration");
     this.configuration.setVariables(props);
