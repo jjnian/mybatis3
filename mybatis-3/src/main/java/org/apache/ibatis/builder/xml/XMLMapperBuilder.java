@@ -496,6 +496,7 @@ public class XMLMapperBuilder extends BaseBuilder {
       Class<?> enclosingType) {
     if (Arrays.asList("association", "collection", "case").contains(context.getName())
         && context.getStringAttribute("select") == null) {
+
       // 处理collection标签
       validateCollection(context, enclosingType);
 
