@@ -60,16 +60,25 @@ public class XMLIncludeTransformer {
    */
   private void applyIncludes(Node source, final Properties variablesContext, boolean included) {
     if ("include".equals(source.getNodeName())) {
+      // 根据include标签找出SQL标签
       Node toInclude = findSqlFragment(getStringAttribute(source, "refid"), variablesContext);
       Properties toIncludeContext = getVariablesContext(source, variablesContext);
+
+      // 递归替换SQL标签中的include
       applyIncludes(toInclude, toIncludeContext, true);
       if (toInclude.getOwnerDocument() != source.getOwnerDocument()) {
         toInclude = source.getOwnerDocument().importNode(toInclude, true);
       }
+      // 用SQL标签替换原来include标签
+      // 但是只是插入了标签，并没有把里面的内容替换掉
       source.getParentNode().replaceChild(toInclude, source);
+
+      // 循环把SQL标签的中的子内容插入到父标签中
       while (toInclude.hasChildNodes()) {
         toInclude.getParentNode().insertBefore(toInclude.getFirstChild(), toInclude);
       }
+
+      // 把SQL标签从父标签中删除掉
       toInclude.getParentNode().removeChild(toInclude);
     } else if (source.getNodeType() == Node.ELEMENT_NODE) {
       if (included && !variablesContext.isEmpty()) {
@@ -80,6 +89,8 @@ public class XMLIncludeTransformer {
           attr.setNodeValue(PropertyParser.parse(attr.getNodeValue(), variablesContext));
         }
       }
+      // 找出标签里面的子内容
+      // 遍历查看子内容里面的是否含有include标签
       NodeList children = source.getChildNodes();
       for (int i = 0; i < children.getLength(); i++) {
         applyIncludes(children.item(i), variablesContext, included);

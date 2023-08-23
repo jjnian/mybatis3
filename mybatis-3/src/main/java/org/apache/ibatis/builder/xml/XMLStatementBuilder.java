@@ -59,6 +59,7 @@ public class XMLStatementBuilder extends BaseBuilder {
     String id = context.getStringAttribute("id");
     String databaseId = context.getStringAttribute("databaseId");
 
+    // 查看当前sql的数据库是否符合现在的要求的数据库
     if (!databaseIdMatchesCurrent(id, databaseId, this.requiredDatabaseId)) {
       return;
     }
@@ -73,6 +74,7 @@ public class XMLStatementBuilder extends BaseBuilder {
     boolean resultOrdered = context.getBooleanAttribute("resultOrdered", false);
 
     // Include Fragments before parsing
+    // 处理include标签，用真正引用的标签代替include标签
     XMLIncludeTransformer includeParser = new XMLIncludeTransformer(configuration, builderAssistant);
     includeParser.applyIncludes(context.getNode());
 
@@ -98,7 +100,7 @@ public class XMLStatementBuilder extends BaseBuilder {
     }
 
     // 解析SELECT、UPDATE、DELETE、INSERT标签，并没有组装SQL
-    // 处理SQl语句
+    // 处理SQl语句为Node节点
     SqlSource sqlSource = langDriver.createSqlSource(configuration, context, parameterTypeClass);
     StatementType statementType = StatementType
         .valueOf(context.getStringAttribute("statementType", StatementType.PREPARED.toString()));

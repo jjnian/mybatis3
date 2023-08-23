@@ -36,6 +36,8 @@ public class XMLScriptBuilder extends BaseBuilder {
 
   private final XNode context;
   private boolean isDynamic;
+
+  // 属性上parameterType的值
   private final Class<?> parameterType;
   private final Map<String, NodeHandler> nodeHandlerMap = new HashMap<>();
 
@@ -66,6 +68,9 @@ public class XMLScriptBuilder extends BaseBuilder {
     // 解析SQL语句中的标签
     MixedSqlNode rootSqlNode = parseDynamicTags(context);
     SqlSource sqlSource;
+
+    // 含有${}字符和各种动态标签会被标记为动态
+    // 不是动态的SQL语句才会使用上parameterType
     if (isDynamic) {
       sqlSource = new DynamicSqlSource(configuration, rootSqlNode);
     } else {

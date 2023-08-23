@@ -33,6 +33,10 @@
         </foreach>
     </select>
 
+    <select id="getSysUser5">
+        select id,name from test
+    </select>
+
     <resultMap id="user1" type="cn.clean.entity.User">
 
     </resultMap>

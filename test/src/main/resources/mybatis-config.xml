@@ -32,7 +32,7 @@
     <!--在主配置文件中关联mapper sql映射文件-->
     <mappers>
 <!--        <mapper resource="mybatis/UserMapper.xml"/>-->
-        <mapper resource="mybatis/SysUserMapper.xml"/>
+<!--        <mapper resource="mybatis/SysUserMapper.xml"/>-->
         <mapper resource="mybatis/CloudUserMapper.xml"/>
     </mappers>
 
