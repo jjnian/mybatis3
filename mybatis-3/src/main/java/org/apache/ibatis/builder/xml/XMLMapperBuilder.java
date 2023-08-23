@@ -60,7 +60,7 @@ public class XMLMapperBuilder extends BaseBuilder {
   // Mapper.xml文件构建助手
   private final MapperBuilderAssistant builderAssistant;
 
-  // 记录mapper文件下的SQL标签
+  // 保存mapper文件下的SQL标签
   private final Map<String, XNode> sqlFragments;
 
   // mapper.xml文件的资源路径
@@ -151,15 +151,19 @@ public class XMLMapperBuilder extends BaseBuilder {
 
       // 解析SQL的四个标签类
       buildStatementFromContext(context.evalNodes("select|insert|update|delete"));
+
     } catch (Exception e) {
       throw new BuilderException("Error parsing Mapper XML. The XML location is '" + resource + "'. Cause: " + e, e);
     }
   }
 
   private void buildStatementFromContext(List<XNode> list) {
+    // 先处理符合要求的DatabaseId
     if (configuration.getDatabaseId() != null) {
       buildStatementFromContext(list, configuration.getDatabaseId());
     }
+
+    // 再处理没有DatabaseId的标签
     buildStatementFromContext(list, null);
   }
 
@@ -416,17 +420,30 @@ public class XMLMapperBuilder extends BaseBuilder {
   }
 
   private void sqlElement(List<XNode> list) {
+    // 先把符合DatabaseId的SQL标签放进去
     if (configuration.getDatabaseId() != null) {
       sqlElement(list, configuration.getDatabaseId());
     }
+
+    // 再放进去没有要求的DatabaseId的SQL标签
     sqlElement(list, null);
   }
 
+  /**
+   * 保存Mapper.xml文件中的SQL标签
+   * @Date 2023/8/23 8:32
+   * @param list
+   * @param requiredDatabaseId
+   */
   private void sqlElement(List<XNode> list, String requiredDatabaseId) {
     for (XNode context : list) {
       String databaseId = context.getStringAttribute("databaseId");
       String id = context.getStringAttribute("id");
       id = builderAssistant.applyCurrentNamespace(id, false);
+
+      // 要求的DatabaseId和SQL标签中的DatabaseId一致才会true
+      // 没有要求的DatabaseId并且sqlFragments中没有被加载
+      // 没有要求的DatabaseId并且sqlFragments中被加载，但是没有DatabaseId
       if (databaseIdMatchesCurrent(id, databaseId, requiredDatabaseId)) {
         sqlFragments.put(id, context);
       }

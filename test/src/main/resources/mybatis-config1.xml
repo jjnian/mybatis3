@@ -26,6 +26,13 @@
         </environment>
     </environments>
 
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+        <property name="SQL Server" value="sqlserver"/>
+        <property name="DB2" value="db2"/>
+        <property name="Oracle" value="oracle" />
+    </databaseIdProvider>
+
     <!--在主配置文件中关联mapper sql映射文件-->
     <mappers>
         <mapper resource="mybatis/UserMapper.xml"></mapper>

@@ -10,6 +10,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 public class MacMain {
@@ -64,7 +67,7 @@ public class MacMain {
         System.out.println(user.toString());
     }
 
-    public static void test4(){
+    public static void test4() {
         Reader resourceAsReader = null;
         try {
             resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
