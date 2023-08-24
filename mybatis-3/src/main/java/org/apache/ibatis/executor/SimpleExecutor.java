@@ -45,8 +45,12 @@ public class SimpleExecutor extends BaseExecutor {
     Statement stmt = null;
     try {
       Configuration configuration = ms.getConfiguration();
+
+      // 生成StatementHandler
       StatementHandler handler = configuration.newStatementHandler(this, ms, parameter, RowBounds.DEFAULT, null, null);
+
       stmt = prepareStatement(handler, ms.getStatementLog());
+
       return handler.update(stmt);
     } finally {
       closeStatement(stmt);

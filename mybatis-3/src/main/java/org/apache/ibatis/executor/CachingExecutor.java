@@ -40,6 +40,7 @@ public class CachingExecutor implements Executor {
 
   // 装饰器模式，里面内部有一个执行器
   private final Executor delegate;
+
   private final TransactionalCacheManager tcm = new TransactionalCacheManager();
 
   public CachingExecutor(Executor delegate) {
