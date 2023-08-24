@@ -69,6 +69,7 @@ public class SimpleExecutor extends BaseExecutor {
       // 执行查询
       // 结果映射
       return handler.query(stmt, resultHandler);
+
     } finally {
       closeStatement(stmt);
     }

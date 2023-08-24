@@ -196,13 +196,21 @@ public class DefaultResultSetHandler implements ResultSetHandler {
 
     // 获取ResultMap的属性
     List<ResultMap> resultMaps = mappedStatement.getResultMaps();
+
     int resultMapCount = resultMaps.size();
+
+    // 验证结果
     validateResultMapsCount(rsw, resultMapCount);
+
     while (rsw != null && resultMapCount > resultSetCount) {
       ResultMap resultMap = resultMaps.get(resultSetCount);
+      // 处理结果映射
       handleResultSet(rsw, resultMap, multipleResults, null);
+
       rsw = getNextResultSet(stmt);
+
       cleanUpAfterHandlingResultSet();
+
       resultSetCount++;
     }
 
@@ -212,8 +220,11 @@ public class DefaultResultSetHandler implements ResultSetHandler {
       while (rsw != null && resultSetCount < resultSets.length) {
         ResultMapping parentMapping = nextResultMaps.get(resultSets[resultSetCount]);
         if (parentMapping != null) {
+
           String nestedResultMapId = parentMapping.getNestedResultMapId();
+
           ResultMap resultMap = configuration.getResultMap(nestedResultMapId);
+          // 处理结果映射
           handleResultSet(rsw, resultMap, null, parentMapping);
         }
         rsw = getNextResultSet(stmt);
