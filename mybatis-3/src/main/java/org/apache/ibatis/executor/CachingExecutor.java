@@ -88,6 +88,7 @@ public class CachingExecutor implements Executor {
       throws SQLException {
     // 处理SQL中的各种标签，组装SQL语句
     BoundSql boundSql = ms.getBoundSql(parameterObject);
+
     CacheKey key = createCacheKey(ms, parameterObject, rowBounds, boundSql);
     return query(ms, parameterObject, rowBounds, resultHandler, key, boundSql);
   }

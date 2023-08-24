@@ -326,6 +326,8 @@ public class XMLMapperBuilder extends BaseBuilder {
       if ("constructor".equals(resultChild.getName())) {
         processConstructorElement(resultChild, typeClass, resultMappings);
       } else if ("discriminator".equals(resultChild.getName())) {
+        // 获取鉴别器
+        // 根据结果映射到不同结果，类似java的Switch
         discriminator = processDiscriminatorElement(resultChild, typeClass, resultMappings);
       } else {
         List<ResultFlag> flags = new ArrayList<>();
@@ -338,6 +340,8 @@ public class XMLMapperBuilder extends BaseBuilder {
 
     // 获取ResultMap的属性值 id、extends、autoMapping
     String id = resultMapNode.getStringAttribute("id", resultMapNode.getValueBasedIdentifier());
+
+    // 获取ResultMap的父类
     String extend = resultMapNode.getStringAttribute("extends");
     Boolean autoMapping = resultMapNode.getBooleanAttribute("autoMapping");
 

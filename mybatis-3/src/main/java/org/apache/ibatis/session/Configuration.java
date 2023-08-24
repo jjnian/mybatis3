@@ -160,20 +160,23 @@ public class Configuration {
   protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
   protected final LanguageDriverRegistry languageRegistry = new LanguageDriverRegistry();
 
-  // 存放mapper.xml文件中对应的SQL标签
+  // 存放mapper.xml文件中<select><insert><update><delete>标签生成的MappedStatement
   protected final Map<String, MappedStatement> mappedStatements = new StrictMap<MappedStatement>(
       "Mapped Statements collection")
           .conflictMessageProducer((savedValue, targetValue) -> ". please check " + savedValue.getResource() + " and "
               + targetValue.getResource());
 
+  // 存放Cache
   protected final Map<String, Cache> caches = new StrictMap<>("Caches collection");
+
   // 存放Mapper标签中的ResultMap
   protected final Map<String, ResultMap> resultMaps = new StrictMap<>("Result Maps collection");
   protected final Map<String, ParameterMap> parameterMaps = new StrictMap<>("Parameter Maps collection");
   protected final Map<String, KeyGenerator> keyGenerators = new StrictMap<>("Key Generators collection");
 
-  // 存放加载的xml文件
+  // 存放加载的xml文件名字和namespace类的全限定名字
   protected final Set<String> loadedResources = new HashSet<>();
+
   protected final Map<String, XNode> sqlFragments = new StrictMap<>("XML fragments parsed from previous mappers");
 
   protected final Collection<XMLStatementBuilder> incompleteStatements = new LinkedList<>();

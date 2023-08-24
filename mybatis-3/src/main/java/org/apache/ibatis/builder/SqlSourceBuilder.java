@@ -86,6 +86,12 @@ public class SqlSourceBuilder extends BaseBuilder {
       return parameterMappings;
     }
 
+    /**
+     * 把#{}里面的字段内容映射起来
+     * @Date 2023/8/24 13:14
+     * @param content
+     * @return {@link String }
+     */
     @Override
     public String handleToken(String content) {
       parameterMappings.add(buildParameterMapping(content));

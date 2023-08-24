@@ -31,6 +31,7 @@ import org.apache.ibatis.session.Configuration;
  */
 public class DynamicContext {
 
+
   public static final String PARAMETER_OBJECT_KEY = "_parameter";
   public static final String DATABASE_ID_KEY = "_databaseId";
 
@@ -38,6 +39,7 @@ public class DynamicContext {
     OgnlRuntime.setPropertyAccessor(ContextMap.class, new ContextAccessor());
   }
 
+  // 方法的参数会放在这里面
   private final ContextMap bindings;
   private final StringJoiner sqlBuilder = new StringJoiner(" ");
   private int uniqueNumber;

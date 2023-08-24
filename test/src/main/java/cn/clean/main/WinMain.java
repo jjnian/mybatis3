@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class WinMain {
 	public static void main(String[] args) {
-		test5();
+		test3();
 	}
 
 	public static void test(){
@@ -47,7 +47,7 @@ public class WinMain {
 	public static void test2(){
 		Reader resourceAsReader = null;
 		try {
-			resourceAsReader = Resources.getResourceAsReader("mybatis-config1.xml");
+			resourceAsReader = Resources.getResourceAsReader("mybatis-config.xml");
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

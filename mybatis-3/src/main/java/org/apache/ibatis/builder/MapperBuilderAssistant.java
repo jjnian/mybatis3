@@ -82,6 +82,13 @@ public class MapperBuilderAssistant extends BaseBuilder {
     this.currentNamespace = currentNamespace;
   }
 
+  /**
+   * 给传进来的id名字加上namespace
+   * @Date 2023/8/24 9:09
+   * @param base
+   * @param isReference
+   * @return {@link String }
+   */
   public String applyCurrentNamespace(String base, boolean isReference) {
     if (base == null) {
       return null;
@@ -163,7 +170,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
       }
       ResultMap resultMap = configuration.getResultMap(extend);
       List<ResultMapping> extendedResultMappings = new ArrayList<>(resultMap.getResultMappings());
-      // 去重
+      // 在父类的ResultMapprings中去掉重复的
       extendedResultMappings.removeAll(resultMappings);
       // Remove parent constructor if this resultMap declares a constructor.
       boolean declaresConstructor = false;
@@ -180,6 +187,8 @@ public class MapperBuilderAssistant extends BaseBuilder {
     }
     ResultMap resultMap = new ResultMap.Builder(configuration, id, type, resultMappings, autoMapping)
         .discriminator(discriminator).build();
+
+    // 添加到ResultMap集合中
     configuration.addResultMap(resultMap);
     return resultMap;
   }

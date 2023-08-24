@@ -67,6 +67,7 @@ public class ParamNameResolver {
         continue;
       }
       String name = null;
+      // 判断是否有Param注解
       for (Annotation annotation : paramAnnotations[paramIndex]) {
         if (annotation instanceof Param) {
           hasParamAnnotation = true;
@@ -125,17 +126,26 @@ public class ParamNameResolver {
     if (args == null || paramCount == 0) {
       return null;
     }
+
+    // 参数不带注解并且只有一个参数
     if (!hasParamAnnotation && paramCount == 1) {
       Object value = args[names.firstKey()];
+
+      // 数组和集合直接返回Map
+      // 其他对象返回该对象
       return wrapToMapIfCollection(value, useActualParamName ? names.get(names.firstKey()) : null);
     } else {
       final Map<String, Object> param = new ParamMap<>();
       int i = 0;
       for (Map.Entry<Integer, String> entry : names.entrySet()) {
+        // 没有注解 arg0--->value
+        // 有注解   注解的参数--->value
         param.put(entry.getValue(), args[entry.getKey()]);
         // add generic param names (param1, param2, ...)
+        // 生成param1--->value
         final String genericParamName = GENERIC_NAME_PREFIX + (i + 1);
         // ensure not to overwrite parameter named with @Param
+        // 如果有人给参数带这个@Param("param1")，为了防止覆盖掉，所以需要判断
         if (!names.containsValue(genericParamName)) {
           param.put(genericParamName, args[entry.getKey()]);
         }
@@ -156,6 +166,9 @@ public class ParamNameResolver {
    * @return a {@link ParamMap}
    *
    * @since 3.5.5
+   *
+   * 如果是Collection和数组会直接返回Map
+   * 其它对象直接返回对象本身
    */
   public static Object wrapToMapIfCollection(Object object, String actualParamName) {
     if (object instanceof Collection) {
