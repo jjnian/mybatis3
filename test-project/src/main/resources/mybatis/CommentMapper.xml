@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.clean.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="cn.clean.entity.comment.Comment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="dynamicid" jdbcType="INTEGER" property="dynamicId" />
+    <result column="parentcommentid" jdbcType="INTEGER" property="parentCommentId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="creatime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="isdel" jdbcType="INTEGER" property="isdel" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userid, dynamicid, parentcommentid, content, createtime, isdel, isabled
+  </sql>
+
+  <sql id="useColumn">
+    id, userid, dynamicid, parentcommentid, content
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <insert id="insert" parameterType="comment.cn.clean.entity.Comment" useGeneratedKeys="true" keyProperty = "id">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="dynamicId != null">
+        dynamicid,
+      </if>
+      <if test="parentCommentId != null">
+        parentcommentid,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="isdel != null">
+        isdel,
+      </if>
+      <if test="isbaled != null">
+        isabled,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicId != null">
+        #{dynamicId,jdbcType=INTEGER},
+      </if>
+      <if test="parentCommentId != null">
+        #{parentCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="isbaled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectComment"  resultMap="commentUser" parameterType="Integer">
+     select
+     c.id as cid,
+     c.content as ccontent,
+     c.createtime as ccreatetime,
+     u.id as uid,
+     u.nickname as unickname,
+     u.avatar as uavatar
+     from
+        comment c
+     join
+        `user` u
+     on
+        c.userid = u.id
+     where
+        c.dynamicid = #{dynamicId}
+     and c.parentcommentid = -1
+     and c.isdel = 1
+     and c.isabled = 1
+  </select>
+
+  <resultMap id="commentUser" type="comment.cn.clean.entity.CommentUser">
+    <id column="cid" property="id"/>
+    <result column="ccreatetime" property="createtime"/>
+    <result column="ccontent" property="content"/>
+    <association property="user" column="userid" javaType="user.cn.clean.entity.User">
+      <id column="uid" property="id"/>
+      <result column="unickname" property="nickname"/>
+      <result column="uavatar" property="avatar"/>
+    </association>
+    <collection property="commentList" javaType="List" column="cid" ofType="comment.cn.clean.entity.CommentUser" select="findSonComment"/>
+  </resultMap>
+
+  <select id="findSonComment" resultMap="commentUser">
+    select
+     c.id as cid,
+     c.content as ccontent,
+     c.createtime as ccreatetime,
+     u.id as uid,
+     u.nickname as unickname,
+     u.avatar as uavatar
+     from
+        comment c
+     join
+        `user` u
+     on
+        c.userid = u.id
+     where
+        c.parentcommentid = #{id}
+     and c.isdel = 1
+     and c.isabled = 1
+  </select>
+
+  <select id="selectDynamicUser" resultType="Integer">
+        select DISTINCT
+            userid
+            from `comment`
+            where dynamicid = #{dynamicId}
+        union
+        select userid
+            from dynamic
+            where id = #{dynamicId}
+  </select>
+
+
+</mapper>

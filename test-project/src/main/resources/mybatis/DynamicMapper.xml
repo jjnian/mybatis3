@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.clean.mapper.DynamicMapper">
+  <resultMap id="BaseResultMap" type="cn.clean.entity.Dynamic">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="mediumaddress" jdbcType="VARCHAR" property="mediumaddress" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="likeNum" jdbcType="INTEGER" property="likeNum" />
+    <result column="isdel" jdbcType="BIGINT" property="isdel" />
+    <result column="isabled" jdbcType="BIGINT" property="isabled" />
+    <result column="commentNum" jdbcType="INTEGER" property="commentNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userid, createtime, content, mediumaddress, type, likeNum, isdel, isabled, commentNum
+  </sql>
+
+  <sql id="userColumn">
+    id, userid, createtime, content, mediumaddress, type, likeNum,commentNum
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dynamic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <insert id="insert" parameterType="cn.clean.entity.Dynamic">
+    insert into dynamic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="mediumaddress != null">
+        mediumaddress,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="likeNum != null">
+        likeNum,
+      </if>
+      <if test="isdel != null">
+        isdel,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="commentNum != null">
+        commentNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumaddress != null">
+        #{mediumaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="likeNum != null">
+        #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=BIGINT},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=BIGINT},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectDynamicSimple" resultType="cn.clean.entity.Dynamic">
+    select
+        <include refid="userColumn" />
+    from dynamic
+    where isdel = 1
+    and isabled = 1
+    order by id desc
+  </select>
+
+  <select id="selectDynamic" resultMap="dynamicUser">
+    select
+        d.id as did,
+        d.createtime as dcreatetime,
+        d.content as dcontent,
+		d.type as dtype,
+		d.mediumaddress as dmediumaddress,
+		d.likeNum as dlikeNum,
+		d.commentNum as dcommentNum,
+		u.id as uid,
+		u.nickname as unickname,
+		u.avatar as uavatar,
+		u.attr as uattr,
+        u.age as uage,
+		u.sex as usex,
+		u.height as uheight,
+		u.weight as uweight,
+		r.role_name as roleName
+    from
+        dynamic d
+    join
+        `user` u
+    on
+        d.userid = u.id
+    join
+        role r
+    on
+        r.id = u.role
+    where
+        d.isdel = 1
+    and
+        d.isabled = 1
+     order by did desc
+  </select>
+
+  <select id="getDynamic" resultMap="dynamicUser">
+    select
+        d.id as did,
+        d.createtime as dcreatetime,
+        d.content as dcontent,
+		d.type as dtype,
+		d.mediumaddress as dmediumaddress,
+		d.likeNum as dlikeNum,
+		d.commentNum as dcommentNum,
+		u.id as uid,
+		u.nickname as unickname,
+		u.avatar as uavatar,
+		u.attr as uattr,
+        u.age as uage,
+		u.sex as usex,
+		u.height as uheight,
+		u.weight as uweight,
+		r.role_name as roleName
+    from
+        dynamic d
+    join
+        `user` u
+    on
+        d.userid = u.id
+    join
+        role r
+    on
+        r.id = u.role
+    where
+        d.isdel = 1
+    and
+        d.isabled = 1
+    <if test="userId != null">
+      and
+      d.userid = #{checkUserId}
+    </if>
+     order by did desc
+  </select>
+
+  <select id="selectDynamicWithUser" resultMap="dynamicUser">
+    select
+        d.id as did,
+        d.createtime as dcreatetime,
+        d.content as dcontent,
+		d.type as dtype,
+		d.mediumaddress as dmediumaddress,
+		d.likeNum as dlikeNum,
+		d.commentNum as dcommentNum,
+		u.id as uid,
+		u.nickname as unickname,
+		u.avatar as uavatar,
+		u.attr as uattr,
+        u.age as uage,
+		u.sex as usex,
+		u.height as uheight,
+		u.weight as uweight,
+		r.role_name as roleName,
+		l.status as lstatus
+    from
+        dynamic d
+    join
+        `user` u
+    on
+        d.userid = u.id
+    left join
+        role r
+    on
+        r.id = u.role
+    left join
+		like_record l
+	on
+	   d.id = l.dynamicid
+    <if test="userId != null">
+      and
+        l.userid = #{userId}
+    </if>
+    where
+        d.isdel = 1
+    and
+        d.isabled = 1
+     order by did desc
+  </select>
+
+  <select id="loadMyselfDynamic" resultMap="dynamicUser">
+    select
+    d.id as did,
+    d.createtime as dcreatetime,
+    d.content as dcontent,
+    d.type as dtype,
+    d.isabled as disabled,
+    d.mediumaddress as dmediumaddress,
+    d.likeNum as dlikeNum,
+    d.commentNum as dcommentNum,
+    u.id as uid,
+    u.nickname as unickname,
+    u.avatar as uavatar,
+    u.attr as uattr,
+    u.age as uage,
+    u.sex as usex,
+    u.height as uheight,
+    u.weight as uweight,
+    l.status as lstatus,
+    r.role_name as roleName
+    from
+    dynamic d
+    join
+    `user` u
+    on
+    d.userid = u.id
+    join role r
+    on
+    r.id = u.role
+    left join
+    like_record l
+    on
+    d.id = l.dynamicid
+    and
+    l.userid = #{userId}
+    where
+    d.isdel = 1
+    and
+    d.userid = #{checkUserId}
+    order by did desc
+  </select >
+
+  <select id="getDynamicWithUser" resultMap="dynamicUser">
+    select
+    d.id as did,
+    d.createtime as dcreatetime,
+    d.content as dcontent,
+    d.type as dtype,
+    d.isabled as disabled,
+    d.mediumaddress as dmediumaddress,
+    d.likeNum as dlikeNum,
+    d.commentNum as dcommentNum,
+    u.id as uid,
+    u.nickname as unickname,
+    u.avatar as uavatar,
+    u.attr as uattr,
+    u.age as uage,
+    u.sex as usex,
+    u.height as uheight,
+    u.weight as uweight,
+    l.status as lstatus,
+    r.role_name as roleName
+    from
+    dynamic d
+    join
+    `user` u
+    on
+    d.userid = u.id
+    join role r
+    on
+    r.id = u.role
+    left join
+    like_record l
+    on
+    d.id = l.dynamicid
+    <if test="userId != null">
+      and
+      l.userid = #{userId}
+    </if>
+    where
+    d.isdel = 1
+    and
+    d.isabled = 1
+    <if test="userId != null">
+      and
+      d.userid = #{checkUserId}
+    </if>
+    order by did desc
+  </select>
+
+  <resultMap id="dynamicUser" type="user.cn.clean.entity.DynamicUser">
+    <id column="did" property="id"/>
+    <result column="dcreatetime" property="createtime"/>
+    <result column="dcontent" property="content"/>
+    <result column="dtype" property="type"/>
+    <result column="disabled" property="isabled"/>
+    <result column="dmediumaddress" property="mediumaddress"/>
+    <result column="dlikeNum" property="likeNum"/>
+    <result column="dcommentNum" property="commentNum"/>
+    <result column="lstatus" property="likeStatic"/>
+    <association property="user" column="userid" javaType="user.cn.clean.entity.User">
+      <id column="uid" property="id"/>
+      <result column="uage" property="age"/>
+      <result column="uattr" property="attr"/>
+      <result column="unickname" property="nickname"/>
+      <result column="uavatar" property="avatar"/>
+      <result column="usex" property="sex"/>
+      <result column="uheight" property="height"/>
+      <result column="uweight" property="weight"/>
+      <result column="roleName" property="roleName"/>
+    </association>
+  </resultMap>
+
+  <update id="updatedynamicCommentNum" parameterType="Integer" >
+    update
+        dynamic
+    set
+        commentNum = commentNum+1
+    where
+        id = #{dynamicid};
+  </update>
+
+  <update id="updateLikeNum">
+     update
+        dynamic
+    set
+        likeNum = likeNum + #{likeNum}
+    where
+        id = #{dynamicId};
+  </update>
+
+  <select id="getUserIdByDynamicId" resultType="Integer">
+    select
+     userid
+     from dynamic
+     where
+     id = #{dynamicId}
+  </select>
+
+  <update id="deleteDynamic">
+    update dynamic set
+        isdel = 0,
+         isabled = 0
+    where id = #{dynamicId}
+  </update>
+
+  <update id="banDynamic">
+ update dynamic set
+        isabled = 0
+    where id = #{dynamicId}
+  </update>
+
+  <update id="startDynamic">
+ update dynamic set
+        isabled = 1
+    where id = #{dynamicId}
+  </update>
+
+
+</mapper>

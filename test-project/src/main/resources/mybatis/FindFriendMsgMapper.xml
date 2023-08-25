@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.clean.mapper.FindFriendMsgMapper">
+  <resultMap id="BaseResultMap" type="cn.clean.entity.FindFriendMsg">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="attr" jdbcType="VARCHAR" property="attr" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="regions" jdbcType="VARCHAR" property="regions" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="sptime" jdbcType="TINYINT" property="sptime" />
+    <result column="height" jdbcType="DOUBLE" property="height" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="other" jdbcType="VARCHAR" property="other" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="isabled" jdbcType="BIT" property="isabled" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="county" jdbcType="VARCHAR" property="county" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, sex, attr, status, type, regions, age, sptime, height, weight, intro, other,
+    contact, createtime, isabled, province, city, county, userid
+  </sql>
+
+  <sql id="Useful_Column_List">
+    id,name, sex, attr, status, type, regions, age, sptime, height, weight, intro, other,
+    contact, createtime
+  </sql>
+
+  <insert id="insert" keyProperty="id" parameterType="FindFriendMsg">
+    insert into find_friend_msg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="attr != null">
+        attr,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="regions != null">
+        regions,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="sptime != null">
+        sptime,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="county != null">
+        county,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="attr != null">
+        #{attr,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="regions != null">
+        #{regions,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sptime != null">
+        #{sptime,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=BIT},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="allMsg" parameterType="SimpleSelectCondition" resultType="FindFriendMsg">
+    select
+     <include refid="Useful_Column_List" />
+     from find_friend_msg
+     <where>
+       isabled = 1
+       <if test="sex != null">
+         and sex = #{sex}
+       </if>
+       <if test="attr != null">
+         and attr = #{attr}
+       </if>
+     </where>
+     order by id desc
+     limit ${loadNum},${selectNum}
+
+  </select>
+
+  <select id="detailSelectMsg" parameterType="DetailSelectCondition" resultType="FindFriendMsg">
+    select
+    <include refid="Useful_Column_List" />
+    from find_friend_msg
+    <where>
+      isabled = 1
+      <if test="sex != null">
+        and sex = #{sex}
+      </if>
+      <if test="attr != null">
+        and attr = #{attr}
+      </if>
+      <if test="type != null">
+        and 'type' = #{type}
+      </if>
+      <if test="status != null">
+        and status = #{status}
+      </if>
+      <if test="province != null">
+        and province = #{province}
+      </if>
+      <if test="city != null">
+        and city = #{city}
+      </if>
+      <if test="heightMin != null">
+        and height &gt;= #{heightMin}
+      </if>
+      <if test="heightMax != null">
+        and height &lt;= #{heightMax}
+      </if>
+      <if test="ageMin != null">
+        and age &gt;= #{ageMin}
+      </if>
+      <if test="ageMax != null">
+        and age &lt;= #{ageMax}
+      </if>
+      <if test="weightMin != null">
+        and weight &gt;= #{weightMin}
+      </if>
+      <if test="weightMax != null">
+        and weight &lt;= #{weightMax}
+      </if>
+    </where>
+    order by id desc
+    limit ${loadNum},${selectNum}
+
+  </select>
+</mapper>

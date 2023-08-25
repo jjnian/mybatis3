@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.clean.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="message.cn.clean.entity.Message" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="dynamicid" property="dynamicid" jdbcType="INTEGER" />
+    <result column="commentid" property="commentid" jdbcType="INTEGER" />
+    <result column="receiverid" property="receiverid" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="isread" property="isread" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, dynamicid, commentid, receiverid, content, `type`, createtime, isread
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+    <select id="getTypeNum" resultType="message.cn.clean.entity.MessageTypeNum">
+        select
+            `type` as messageType,count(id) as typeNum
+        from message
+        where receiverid = #{userId} and isread = 0
+        GROUP BY `type`
+    </select>
+
+    <resultMap id="typeNumMap" type="java.util.HashMap">
+        <result  column="type" javaType="Integer" jdbcType="INTEGER"/>
+        <result column="typeNum" javaType="Integer" jdbcType="INTEGER"/>
+    </resultMap>
+
+  <select id="getNotice" resultType="Integer">
+    select
+        count(*)
+    from message
+    where
+        isread = 0
+    and
+        receiverid = #{userId}
+  </select>
+
+
+
+  <insert id="insertSelective" parameterType="message.cn.clean.entity.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="dynamicid != null" >
+        dynamicid,
+      </if>
+      <if test="commentid != null" >
+        commentid,
+      </if>
+      <if test="receiverid != null" >
+        receiverid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="isread != null" >
+        isread,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicid != null" >
+        #{dynamicid,jdbcType=INTEGER},
+      </if>
+      <if test="commentid != null" >
+        #{commentid,jdbcType=INTEGER},
+      </if>
+      <if test="receiverid != null" >
+        #{receiverid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isread != null" >
+        #{isread,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="hasMessage" resultType="Integer">
+    select id
+    from message
+    where
+    userid = #{userId}
+    and dynamicid = #{dynamicId}
+
+  </select>
+  <select id="hasCommentMessage" resultType="Integer">
+    select id
+    from message
+    where
+    userid = #{userId}
+    and dynamicid = #{dynamicId}
+    and commentid= #{commentId}
+  </select>
+
+  <select id="getFolloeMessage" resultMap="messageUser">
+    select
+    m.id as id,
+     m.isread as isread,
+    m.createtime as mcreatetime,
+    u.avatar as uavatar,
+    u.nickname as unickname
+    from `user` u
+    join message m
+    on
+    u.id = m.userid
+    and
+    m.receiverid = #{userId}
+    where
+    m.type = #{type}
+     order by m.id desc
+  </select>
+  <resultMap id="messageUser" type="message.cn.clean.entity.MessageFollow">
+    <result column="uavatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="unickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="mcreatetime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <select id="getLikeMessage" resultMap="messageLike">
+     select
+        m.id as id,
+        m.isread as isread,
+        m.createtime as mcreatetime,
+        u.avatar as uavatar,
+        u.nickname as unickname,
+        d.content as dcontent
+     from `user` u
+     join message m
+     on
+        u.id = m.userid
+     and
+        m.receiverid = #{userId}
+     join dynamic d
+     on
+        d.id = m.dynamicid
+     where
+     m.type = #{type}
+      order by m.id desc
+  </select>
+  <resultMap id="messageLike" type="message.cn.clean.entity.MessageFollow">
+    <result column="uavatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="unickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="mcreatetime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="dcontent" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="getSystemMessage" resultMap="messageLike">
+     select
+        m.id as id,
+        m.isread as isread,
+        m.createtime as mcreatetime,
+        u.avatar as uavatar,
+        u.nickname as unickname,
+        m.content as dcontent
+     from `user` u
+     join message m
+     on
+        u.id = m.userid
+     where
+     m.type = #{type} and  m.receiverid = #{userId}
+      order by m.id desc
+  </select>
+
+  <select id="getCommentMessage" resultMap="commentMessage">
+     select
+        m.id as id,
+        m.isread as isread,
+        m.createtime as mcreatetime,
+        u.avatar as uavatar,
+        u.nickname as unickname,
+        c.id as cid,
+        c.content as ccontent,
+        c.parentcommentid as cparentcommentid,
+        d.id as did,
+        d.content as dcontent
+     from message m
+     join `user` u
+     on
+        u.id = m.userid
+				and
+        m.receiverid = #{userId}
+     join dynamic d
+     on
+        m.dynamicid = d.id
+	 left join
+        `comment` c
+     on
+        c.id = m.commentid
+     where
+     m.type = #{type}
+     order by m.id desc
+  </select>
+
+  <resultMap id="commentMessage" type="message.cn.clean.entity.CommentMessage">
+    <result column="uavatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="unickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="mcreatetime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="dcontent" property="dynamicContent" jdbcType="VARCHAR" />
+    <result column="ccontent" property="commentContent" jdbcType="VARCHAR" />
+    <association property="parentCommentContent" column="cparentcommentid" select="parentContent"/>
+  </resultMap>
+
+   <select id="parentContent" parameterType="Integer" resultType="String">
+       select content
+       from comment
+       where id = #{id}
+   </select>
+
+    <update id="hasReadMessage">
+        update
+            message
+        set
+            isread = 1
+        where
+            id = #{messageId};
+    </update>
+    <update id="readAllMessage">
+          update
+            message
+        set
+            isread = 1
+        where
+            receiverid = #{userId}
+            and `type` = #{messageType}
+    </update>
+</mapper>

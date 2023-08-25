@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.clean.mapper.UserMapper">
+
+  <sql id="Base_Column_List">
+    id, email, nickname, role, avatar, password, isable, points, createtime, age, height,
+    weight, sex, attr,sptime,status,regions
+  </sql>
+
+  <sql id="userInfo">
+    id,email, nickname, role, avatar, points, age, height,
+    weight, sex, attr,sptime,regions
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="Integer" resultMap="BaseResultMap">
+     select
+        u.id as id,
+        u.email as email,
+        u.nickname as nickname,
+        u.avatar as avatar,
+        u.points as points,
+        u.signin as signin,
+        u.age as age,
+        u.sex as sex,
+        u.height as height,
+        u.weight as weight,
+        u.sptime as sptime,
+        u.regions as regions,
+        u.attr as attr,
+        u.status as status,
+        r.role_name as roleName,
+        r.points as nextLevelPoint,
+        p.is_agree_location as isAgreeLocation,
+        p.is_agree_info as isAgreeInfo,
+        p.is_agree_dynamic as isAgreeDynamic,
+        p.is_agree_home as isAgreeHome
+     from
+        `user` u
+     join
+        role r
+     on
+        u.role = r.id
+     join
+        permission p
+     on
+        p.user_id = u.id
+     where
+        u.id = #{id,jdbcType=INTEGER}
+  </select>
+  <resultMap id="BaseResultMap" type="user.cn.clean.entity.MyDetailUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="signin" jdbcType="INTEGER" property="hasClockIn" />
+    <association property="permission" javaType="cn.clean.entity.Permission">
+        <result column="isAgreeLocation"  property="isAgreeLocation" />
+        <result column="isAgreeInfo"  property="isAgreeInfo" />
+        <result column="isAgreeDynamic" property="isAgreeDynamic" />
+        <result column="isAgreeHome"  property="isAgreeHome" />
+    </association>
+    <association property="followers" column="id" javaType="Integer" select="getFollower"/>
+    <association property="viewers" column="id" javaType="Integer" select="getView"/>
+    <association property="dynamics" column="id" javaType="Integer" select="getDynamic"/>
+    <association property="notices" column="id" javaType="Integer" select="getNotice"/>
+  </resultMap>
+
+  <insert id="registerUser" parameterType="user.cn.clean.entity.User" useGeneratedKeys="true" keyProperty="id">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="isable != null">
+        isable,
+      </if>
+      <if test="points != null">
+        points,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="attr != null">
+        attr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="isable != null">
+        #{isable,jdbcType=BIT},
+      </if>
+      <if test="points != null">
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="attr != null">
+        #{attr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="setUserLocation" >
+     update `user`
+     set lat = #{lat},
+     lng = #{lng},
+     regions = #{regions}
+     where
+     id = #{id}
+  </update>
+  <update id="saveUserInfo" parameterType="user.cn.clean.entity.User">
+    update `user`
+    <set>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="attr != null">
+        attr = #{attr,jdbcType=VARCHAR},
+      </if>
+      <if test="sptime != null">
+        sptime = #{sptime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="regions != null">
+        regions = #{regions,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="hasThisUser" resultType="Integer">
+    select count(email) from user
+    where
+    email = #{email}
+  </select>
+
+  <select id="selectByEmail" resultType="user.cn.clean.entity.User">
+     select
+        <include refid="Base_Column_List" />
+     from user
+     where
+     email = #{email}
+  </select>
+
+  <update id="updatePasswordByEmail">
+    update user
+    set password = #{password,jdbcType=VARCHAR}
+    where
+    email = #{email}
+  </update>
+
+  <update id="updateAvatar">
+    update user
+    set avatar = #{avatar,jdbcType=VARCHAR}
+    where
+    id = #{id}
+  </update>
+
+  <select id="getUserInfo" resultType="user.cn.clean.entity.User">
+    select <include refid="userInfo"/>
+    from user
+    where id = #{id}
+  </select>
+
+  <update id="signIn" >
+    update `user` set
+        points = points + 5,
+        signin = 1
+    where id = #{userId}
+  </update>
+
+  <select id="hasSignIn" resultType="Integer">
+    select points from user
+    where signin = 0
+    and id = #{userId}
+  </select>
+
+  <update id="reSignIn">
+     update user set
+        signin = 0
+    where  signin = 1
+  </update>
+
+  <select id="getOtherDetaileUser" resultMap="DetaileUser">
+     <!--select-->
+     <!--  <include refid="userInfo"/>-->
+     <!--from-->
+     <!--   `user`-->
+     <!--where-->
+     <!--   id = #{userId}-->
+      select
+      u.id as uid,
+      u.sex as sex,
+
+      u.age as age,
+      u.attr as attr,
+      u.status as status,
+      u.regions as regions,
+      u.weight as weight,
+      u.height as height,
+      u.sptime as sptime,
+      u.email as uemail,
+      u.nickname as unickname,
+      u.avatar as uavatar,
+      u.points as upoints,
+      r.role_name as roleName,
+      r.points as nextLevelPoint
+      from
+      `user` u
+      left join
+      role r
+      on
+      r.id = u.role
+      where
+      u.id = #{receiverId}
+  </select>
+  <select id="getDetaileUser" resultMap="DetaileUser">
+     select
+        u.id as uid,
+        u.sex as sex,
+      u.age as age,
+      u.attr as attr,
+      u.status as status,
+      u.regions as regions,
+      u.weight as weight,
+      u.height as height,
+      u.sptime as sptime,
+      u.email as uemail,
+      u.nickname as unickname,
+      u.avatar as uavatar,
+      u.points as upoints,
+      r.role_name as roleName,
+      r.points as nextLevelPoint
+     from
+        `user` u
+     left join
+        role r
+     on
+        r.id = u.role
+     left join
+        follower f
+     on
+        u.id = f.followerid
+        and f.userid = #{userId}
+     where
+        u.id = #{receiverId}
+
+  </select>
+
+  <resultMap id="DetaileUser" type="user.cn.clean.entity.OtherDetailUser">
+    <id column="uid" jdbcType="INTEGER" property="id" />
+    <result column="uemail" jdbcType="VARCHAR" property="email" />
+    <result column="unickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="uavatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="upoints" jdbcType="INTEGER" property="points" />
+    <result column="fstatus" jdbcType="INTEGER" property="hasFollower" />
+    <association property="followers" column="uid" javaType="Integer" select="getFollower"/>
+    <association property="viewers" column="uid" javaType="Integer" select="getView"/>
+
+  </resultMap>
+
+  <select id="getFollower" resultType="Integer">
+    select count(id) from follower
+    where followerid = #{id}
+  </select>
+
+  <select id="getView" resultType="Integer">
+    select count(id) from follower
+    where userid = #{id}
+  </select>
+  <select id="getDynamic" resultType="Integer">
+    select count(id) from dynamic
+    where userid = #{id}
+  </select>
+
+  <select id="getNotice" resultType="Integer">
+    select
+        count(*)
+    from message
+    where
+        isread = 0
+    and
+        receiverid = #{id}
+  </select>
+
+  <select id="getFollowers" resultType="user.cn.clean.entity.User">
+    select
+     u.id as id,email, nickname, role, avatar, points, age, height,
+    weight, sex, attr,sptime,regions
+    from `user` u
+    join  follower f
+    on
+        u.id = f.userid
+    where
+        f.followerid = #{userId}
+  </select>
+
+  <select id="getViewers" resultType="user.cn.clean.entity.User">
+    select
+     u.id as id,email, nickname, role, avatar, points, age, height,
+    weight, sex, attr,sptime,regions
+    from `user` u
+    join  follower f
+    on
+    u.id = f.followerid
+    where
+    f.userid = #{userId}
+  </select>
+  <select id="getAgreeLocation" resultType="Integer">
+    select agreeLocation
+    from `user`
+    where id = #{userId}
+  </select>
+  <update id="changeAgreeLocation">
+     update user
+    set agreeLocation = #{agreeStatus}
+    where
+    id = #{userId}
+  </update>
+
+
+    <select id="getUserMsg" resultType="user.cn.clean.entity.LocationUser">
+         select
+         id,email, nickname, role, avatar, points, age, height,
+            weight, sex, attr,regions
+        from `user`
+        where id = #{userId}
+    </select>
+
+</mapper>
