@@ -248,7 +248,7 @@
             id = #{messageId};
     </update>
     <update id="readAllMessage">
-          update
+        update
             message
         set
             isread = 1

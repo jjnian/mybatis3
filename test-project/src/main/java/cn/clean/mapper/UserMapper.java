@@ -36,8 +36,6 @@ public interface UserMapper {
 
     OtherDetailUser getDetaileUser(@Param("userId")Integer userId, @Param("receiverId")Integer receiverId);
 
-    //User getOtherDetaileUser(Integer userId);
-
     OtherDetailUser getOtherDetaileUser(Integer userId);
 
     List<User> getFollowers(Integer userId);
