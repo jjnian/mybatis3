@@ -27,7 +27,7 @@
   </select>
 
 
-  <insert id="insert" parameterType="comment.cn.clean.entity.Comment" useGeneratedKeys="true" keyProperty = "id">
+  <insert id="insert" parameterType="cn.clean.entity.comment.Comment" useGeneratedKeys="true" keyProperty = "id">
     insert into comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -104,16 +104,16 @@
      and c.isabled = 1
   </select>
 
-  <resultMap id="commentUser" type="comment.cn.clean.entity.CommentUser">
+  <resultMap id="commentUser" type="cn.clean.entity.comment.CommentUser">
     <id column="cid" property="id"/>
     <result column="ccreatetime" property="createtime"/>
     <result column="ccontent" property="content"/>
-    <association property="user" column="userid" javaType="user.cn.clean.entity.User">
+    <association property="user" column="userid" javaType="cn.clean.entity.user.User">
       <id column="uid" property="id"/>
       <result column="unickname" property="nickname"/>
       <result column="uavatar" property="avatar"/>
     </association>
-    <collection property="commentList" javaType="List" column="cid" ofType="comment.cn.clean.entity.CommentUser" select="findSonComment"/>
+    <collection property="commentList" javaType="List" column="cid" ofType="cn.clean.entity.comment.CommentUser" select="findSonComment"/>
   </resultMap>
 
   <select id="findSonComment" resultMap="commentUser">

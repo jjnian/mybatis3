@@ -1,17 +1,14 @@
 package cn.clean.main;
 
+import cn.clean.entity.user.User;
+import cn.clean.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -31,6 +28,9 @@ public class WinMain {
 		SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
 		SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
 		SqlSession sqlSession = ssf.openSession();
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		User user = mapper.getUserInfo(9);
+		System.out.println(user);
 	}
 
 

@@ -46,7 +46,7 @@
      where
         u.id = #{id,jdbcType=INTEGER}
   </select>
-  <resultMap id="BaseResultMap" type="user.cn.clean.entity.MyDetailUser">
+  <resultMap id="BaseResultMap" type="cn.clean.entity.user.MyDetailUser">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="signin" jdbcType="INTEGER" property="hasClockIn" />
     <association property="permission" javaType="cn.clean.entity.Permission">
@@ -61,7 +61,7 @@
     <association property="notices" column="id" javaType="Integer" select="getNotice"/>
   </resultMap>
 
-  <insert id="registerUser" parameterType="user.cn.clean.entity.User" useGeneratedKeys="true" keyProperty="id">
+  <insert id="registerUser" parameterType="cn.clean.entity.user.User" useGeneratedKeys="true" keyProperty="id">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -160,7 +160,7 @@
      where
      id = #{id}
   </update>
-  <update id="saveUserInfo" parameterType="user.cn.clean.entity.User">
+  <update id="saveUserInfo" parameterType="cn.clean.entity.user.User">
     update `user`
     <set>
       <if test="nickname != null">
@@ -202,7 +202,7 @@
     email = #{email}
   </select>
 
-  <select id="selectByEmail" resultType="user.cn.clean.entity.User">
+  <select id="selectByEmail" resultType="cn.clean.entity.user.User">
      select
         <include refid="Base_Column_List" />
      from user
@@ -315,7 +315,7 @@
 
   </select>
 
-  <resultMap id="DetaileUser" type="user.cn.clean.entity.OtherDetailUser">
+  <resultMap id="DetaileUser" type="cn.clean.entity.user.OtherDetailUser">
     <id column="uid" jdbcType="INTEGER" property="id" />
     <result column="uemail" jdbcType="VARCHAR" property="email" />
     <result column="unickname" jdbcType="VARCHAR" property="nickname" />
@@ -351,7 +351,7 @@
         receiverid = #{id}
   </select>
 
-  <select id="getFollowers" resultType="user.cn.clean.entity.User">
+  <select id="getFollowers" resultType="cn.clean.entity.user.User">
     select
      u.id as id,email, nickname, role, avatar, points, age, height,
     weight, sex, attr,sptime,regions
@@ -363,7 +363,7 @@
         f.followerid = #{userId}
   </select>
 
-  <select id="getViewers" resultType="user.cn.clean.entity.User">
+  <select id="getViewers" resultType="cn.clean.entity.user.User">
     select
      u.id as id,email, nickname, role, avatar, points, age, height,
     weight, sex, attr,sptime,regions
@@ -387,7 +387,7 @@
   </update>
 
 
-    <select id="getUserMsg" resultType="user.cn.clean.entity.LocationUser">
+    <select id="getUserMsg" resultType="cn.clean.entity.user.LocationUser">
          select
          id,email, nickname, role, avatar, points, age, height,
             weight, sex, attr,regions

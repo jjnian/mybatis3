@@ -176,6 +176,19 @@ public class MapperAnnotationBuilder {
           // ignore, resource is not required
         }
       }
+
+      // 自己添加去mybatis下面查找文件
+      if (inputStream == null){
+        String[] parts = xmlResource.split("/");
+        String xmlName = "mybatis/" + parts[parts.length - 1];
+        try {
+          inputStream = Resources.getResourceAsStream(type.getClassLoader(), xmlName);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      }
+      // 自己添加去mybatis下面查找文件
+
       if (inputStream != null) {
         XMLMapperBuilder xmlParser = new XMLMapperBuilder(inputStream, assistant.getConfiguration(), xmlResource,
             configuration.getSqlFragments(), type.getName());

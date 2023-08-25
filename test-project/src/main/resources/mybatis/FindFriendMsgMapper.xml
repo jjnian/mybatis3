@@ -33,7 +33,7 @@
     contact, createtime
   </sql>
 
-  <insert id="insert" keyProperty="id" parameterType="FindFriendMsg">
+  <insert id="insert" keyProperty="id" parameterType="cn.clean.entity.FindFriendMsg">
     insert into find_friend_msg
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -161,7 +161,7 @@
     </trim>
   </insert>
 
-  <select id="allMsg" parameterType="SimpleSelectCondition" resultType="FindFriendMsg">
+  <select id="allMsg" parameterType="cn.clean.entity.SimpleSelectCondition" resultType="cn.clean.entity.FindFriendMsg">
     select
      <include refid="Useful_Column_List" />
      from find_friend_msg
@@ -179,7 +179,7 @@
 
   </select>
 
-  <select id="detailSelectMsg" parameterType="DetailSelectCondition" resultType="FindFriendMsg">
+  <select id="detailSelectMsg" parameterType="cn.clean.entity.DetailSelectCondition" resultType="cn.clean.entity.FindFriendMsg">
     select
     <include refid="Useful_Column_List" />
     from find_friend_msg
