@@ -10,7 +10,7 @@
 - spring（mybatis-spring源码）
 - spring-boot-starter（spring-boot-starter源码）
 - test(简单测试源码)
-- test-project(使用源码搭建的测试源码)
+- test-project(使用源码搭建的测试工程)
 
 ### 3.mybatis增强
 在mybatis配置文件中使用如下方式加载mapper文件
