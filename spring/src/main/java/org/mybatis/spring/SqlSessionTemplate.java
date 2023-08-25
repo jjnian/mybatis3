@@ -423,7 +423,7 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-      // 根据DefaultSqlSession
+      // 生成默认DefaultSqlSession
       SqlSession sqlSession = getSqlSession(SqlSessionTemplate.this.sqlSessionFactory,
           SqlSessionTemplate.this.executorType, SqlSessionTemplate.this.exceptionTranslator);
       try {
