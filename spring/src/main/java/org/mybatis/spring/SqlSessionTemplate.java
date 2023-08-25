@@ -74,12 +74,15 @@ import org.springframework.dao.support.PersistenceExceptionTranslator;
  */
 public class SqlSessionTemplate implements SqlSession, DisposableBean {
 
+  // 从bean获取
   private final SqlSessionFactory sqlSessionFactory;
 
   private final ExecutorType executorType;
 
+  // 调用SQL真正的sqlSession
   private final SqlSession sqlSessionProxy;
 
+  //
   private final PersistenceExceptionTranslator exceptionTranslator;
 
   /**
@@ -419,6 +422,8 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
   private class SqlSessionInterceptor implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+      // 根据DefaultSqlSession
       SqlSession sqlSession = getSqlSession(SqlSessionTemplate.this.sqlSessionFactory,
           SqlSessionTemplate.this.executorType, SqlSessionTemplate.this.exceptionTranslator);
       try {

@@ -686,6 +686,8 @@ public class SqlSessionFactoryBean
       }
     }
 
+    // 配置数据源到Environment类中
+    // 把Environment配置到配置类中
     targetConfiguration.setEnvironment(new Environment(this.environment,
         this.transactionFactory == null ? new SpringManagedTransactionFactory() : this.transactionFactory,
         this.dataSource));
@@ -716,6 +718,7 @@ public class SqlSessionFactoryBean
       LOGGER.debug(() -> "Property 'mapperLocations' was not specified.");
     }
 
+    // 生成DefaultSqlSessionFactory类
     return this.sqlSessionFactoryBuilder.build(targetConfiguration);
   }
 
