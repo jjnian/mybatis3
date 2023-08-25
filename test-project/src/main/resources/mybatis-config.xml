@@ -10,23 +10,6 @@
         <setting name="logImpl"                  value="SLF4J" /> &lt;!&ndash; 指定 MyBatis 所用日志的具体实现 &ndash;&gt;
         &lt;!&ndash; <setting name="mapUnderscoreToCamelCase" value="true"/>  驼峰式命名 &ndash;&gt;
     </settings>-->
-    <environments default="dev">
-        <!--        可以配置多数据源 -->
-        <environment id="dev">
-            <!--事务管理，目前交给JDBC管理-->
-            <transactionManager type="JDBC"></transactionManager>
-            <dataSource type="POOLED">
-                <!--这里面的name是不能更改的，这是别人定义的名字-->
-                <!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
-                <!--                <property name="url" value="jdbc:mysql://43.140.214.96:3306/test"/>-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://127.0.0.1:3306/clean"/>
-
-                <property name="username" value="mysql"/>
-                <property name="password" value="123456"/>
-            </dataSource>
-        </environment>
-    </environments>
     <settings>
         <setting name="cacheEnabled"             value="true" />
         <setting name="useGeneratedKeys"         value="true"/>
@@ -43,6 +26,23 @@
         <typeAlias type="java.util.List" alias="List"/>
         <typeAlias type="java.util.Map" alias="map"/>
     </typeAliases>
+    <environments default="dev">
+        <!--        可以配置多数据源 -->
+        <environment id="dev">
+            <!--事务管理，目前交给JDBC管理-->
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <!--这里面的name是不能更改的，这是别人定义的名字-->
+                <!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--                <property name="url" value="jdbc:mysql://43.140.214.96:3306/test"/>-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/clean"/>
+
+                <property name="username" value="mysql"/>
+                <property name="password" value="Jrx123654@qq"/>
+            </dataSource>
+        </environment>
+    </environments>
 <!--    <plugins>-->
 <!--        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>-->
 <!--    </plugins>-->

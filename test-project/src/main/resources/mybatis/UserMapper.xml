@@ -224,7 +224,7 @@
     id = #{id}
   </update>
 
-  <select id="getUserInfo" resultType="user.cn.clean.entity.User">
+  <select id="getUserInfo" resultType="cn.clean.entity.user.User">
     select <include refid="userInfo"/>
     from user
     where id = #{id}

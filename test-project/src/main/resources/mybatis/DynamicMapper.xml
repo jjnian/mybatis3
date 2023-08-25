@@ -314,7 +314,7 @@
     order by did desc
   </select>
 
-  <resultMap id="dynamicUser" type="user.cn.clean.entity.DynamicUser">
+  <resultMap id="dynamicUser" type="cn.clean.entity.user.DynamicUser">
     <id column="did" property="id"/>
     <result column="dcreatetime" property="createtime"/>
     <result column="dcontent" property="content"/>
@@ -324,7 +324,7 @@
     <result column="dlikeNum" property="likeNum"/>
     <result column="dcommentNum" property="commentNum"/>
     <result column="lstatus" property="likeStatic"/>
-    <association property="user" column="userid" javaType="user.cn.clean.entity.User">
+    <association property="user" column="userid" javaType="cn.clean.entity.user.User">
       <id column="uid" property="id"/>
       <result column="uage" property="age"/>
       <result column="uattr" property="attr"/>
