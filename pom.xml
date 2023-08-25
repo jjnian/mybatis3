@@ -19,6 +19,7 @@
     <module>spring-boot-starter</module>
     <module>parent</module>
     <module>test</module>
+    <module>test-project</module>
   </modules>
 
   <build>
