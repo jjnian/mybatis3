@@ -13,8 +13,9 @@ import java.io.Reader;
 /**
  *
  */
-public class WinMain {
+public class Main {
 	public static void main(String[] args) {
+
 		test();
 	}
 
