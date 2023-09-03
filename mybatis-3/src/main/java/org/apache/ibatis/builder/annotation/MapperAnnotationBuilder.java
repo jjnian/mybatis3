@@ -127,11 +127,15 @@ public class MapperAnnotationBuilder {
         }
         if (getAnnotationWrapper(method, false, Select.class, SelectProvider.class).isPresent()
             && method.getAnnotation(ResultMap.class) == null) {
+          // 解析ResultMap
           parseResultMap(method);
         }
         try {
+          // 解析成MapperStatement
           parseStatement(method);
         } catch (IncompleteElementException e) {
+
+          // 记录Build和method
           configuration.addIncompleteMethod(new MethodResolver(this, method));
         }
       }
@@ -245,6 +249,8 @@ public class MapperAnnotationBuilder {
     Result[] results = method.getAnnotationsByType(Result.class);
     TypeDiscriminator typeDiscriminator = method.getAnnotation(TypeDiscriminator.class);
     String resultMapId = generateResultMapName(method);
+
+    // 把ResultMap保存到配置类中
     applyResultMap(resultMapId, returnType, args, results, typeDiscriminator);
     return resultMapId;
   }
