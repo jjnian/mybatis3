@@ -42,14 +42,6 @@ INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`
 INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (28, 10, 62, 27, '测试测试', '2021-11-14 13:32:10', 1, 1);
 INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (29, 10, 69, -1, '第一条评论😈', '2021-11-15 09:32:19', 1, 1);
 INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (30, 10, 69, 29, '第一条评论的第一条评论😂', '2021-11-15 09:32:43', 1, 1);
-INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (31, 10, 79, -1, '测试', '2021-11-15 12:44:49', 1, 1);
-INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (32, 10, 79, 31, '测试2😘😘', '2021-11-15 13:23:49', 1, 1);
-INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (33, 10, 79, 32, '测试3', '2021-11-15 13:24:09', 1, 1);
-INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (34, 10, 79, -1, '测试2', '2021-11-15 13:24:20', 1, 1);
-INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (35, 10, 79, 34, '测试22', '2021-11-15 13:24:29', 1, 1);
-INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (36, 12, 140, -1, '1', '2021-11-17 12:25:23', 1, 1);
-INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (37, 12, 140, 36, '1---2', '2021-11-17 12:25:31', 1, 1);
-INSERT INTO `comment` (`id`, `userid`, `dynamicid`, `parentcommentid`, `content`, `createtime`, `isdel`, `isabled`) VALUES (38, 12, 140, -1, '2', '2021-11-17 12:25:36', 1, 1);
 COMMIT;
 
 -- ----------------------------
@@ -112,16 +104,16 @@ CREATE TABLE `find_friend_msg` (
 -- Records of find_friend_msg
 -- ----------------------------
 BEGIN;
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (1, 'MX', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-10-16 03:55:59', 0, 1, '', '', '', NULL);
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (2, '123123', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-02 03:48:22', 0, 1, '', '', '', NULL);
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (3, '安宁', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-02 08:04:02', 1, 1, '', '', '', NULL);
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (4, '星星', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-03 07:01:45', 1, 1, '', '', '', NULL);
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (5, '萌萌', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-03 09:45:46', 1, 1, '', '', '', NULL);
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (6, 'XXXx', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-03 13:50:02', 1, 1, '', '', '', NULL);
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (7, '布布', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-04 03:15:42', 1, 1, '', '', '', NULL);
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (8, '悠悠', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-05 03:07:47', 1, 1, '', '', '', NULL);
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (9, '桥', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-05 03:17:26', 1, 1, '', '', '', NULL);
-INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (10, '小度', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-05 04:25:45', 1, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (1, '1', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-10-16 03:55:59', 0, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (2, '2', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-02 03:48:22', 0, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (3, '3', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-02 08:04:02', 1, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (4, '4', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-03 07:01:45', 1, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (5, '5', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-03 09:45:46', 1, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (6, '6', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-03 13:50:02', 1, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (7, '7', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-04 03:15:42', 1, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (8, '8', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-05 03:07:47', 1, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (9, '9', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-05 03:17:26', 1, 1, '', '', '', NULL);
+INSERT INTO `find_friend_msg` (`id`, `name`, `sex`, `attr`, `status`, `type`, `regions`, `age`, `sptime`, `height`, `weight`, `intro`, `other`, `contact`, `createtime`, `isabled`, `isaudit`, `province`, `city`, `county`, `userid`) VALUES (10, '10', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '2021-11-05 04:25:45', 1, 1, '', '', '', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -170,15 +162,6 @@ BEGIN;
 INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (1, 9, 140, 1, '2021-11-20 19:07:22', NULL, NULL);
 INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (2, 9, 139, 1, '2021-11-20 19:14:14', NULL, NULL);
 INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (3, 9, 138, 1, '2021-11-20 19:14:14', NULL, NULL);
-INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (4, 14, 140, 1, '2021-11-20 19:39:37', NULL, NULL);
-INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (5, 14, 139, 1, '2021-11-20 19:39:37', NULL, NULL);
-INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (6, 14, 138, 1, '2021-11-20 19:39:37', NULL, NULL);
-INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (7, 14, 141, 1, '2021-11-21 09:38:00', NULL, NULL);
-INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (8, 9, 141, 0, '2021-11-22 21:05:46', NULL, NULL);
-INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (9, 14, 142, 1, '2021-11-29 14:56:37', NULL, NULL);
-INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (10, 9, 142, 1, '2021-11-29 17:43:28', NULL, NULL);
-INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (11, 9, 143, 1, '2021-12-05 20:03:47', NULL, NULL);
-INSERT INTO `like_record` (`id`, `userid`, `dynamicid`, `status`, `createtime`, `type`, `sendmessage`) VALUES (12, 9, 144, 1, '2021-12-06 10:32:48', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -206,25 +189,6 @@ INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `
 INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (15, 14, 140, NULL, 9, NULL, 1, '2021-11-22 16:04:54', 0);
 INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (16, 14, NULL, NULL, 9, NULL, 2, '2021-11-22 16:15:49', 1);
 INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (17, 14, 140, 45, 9, NULL, 0, '2021-11-22 16:18:14', 1);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (18, 14, 140, 46, 9, NULL, 0, '2021-11-22 16:19:26', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (19, 14, NULL, NULL, 14, NULL, 2, '2021-11-22 20:24:21', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (20, 9, NULL, NULL, 14, NULL, 2, '2021-11-22 20:26:21', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (21, 9, NULL, NULL, 9, NULL, 2, '2021-11-22 20:26:23', 1);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (22, 9, 141, NULL, 14, NULL, 1, '2021-11-22 21:04:53', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (23, 9, 140, 47, 14, NULL, 0, '2021-11-23 09:21:34', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (24, 15, NULL, NULL, 9, '<span style=\"color: red\">注意安全</span>', 3, '2021-11-23 09:21:34', 1);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (25, 9, 138, NULL, 14, NULL, 1, '2021-11-23 20:29:25', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (26, 9, 139, NULL, 9, NULL, 1, '2021-11-23 20:29:49', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (27, 14, 142, NULL, 9, NULL, 1, '2021-11-29 14:56:35', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (28, 9, 142, NULL, 9, NULL, 1, '2021-11-29 17:16:23', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (29, 14, 141, NULL, 14, NULL, 1, '2021-12-01 20:18:04', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (30, 14, 143, 52, 9, NULL, 0, '2021-12-03 09:57:01', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (31, 14, 143, 53, 9, NULL, 0, '2021-12-03 09:57:28', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (32, 9, 143, 54, 14, NULL, 0, '2021-12-03 21:57:00', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (33, 9, 143, 55, 14, NULL, 0, '2021-12-03 21:57:56', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (34, 9, 143, 56, 14, NULL, 0, '2021-12-03 21:59:09', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (35, 9, 143, 57, 14, NULL, 0, '2021-12-03 21:59:51', 0);
-INSERT INTO `message` (`id`, `userid`, `dynamicid`, `commentid`, `receiverid`, `content`, `type`, `createtime`, `isread`) VALUES (36, 15, NULL, NULL, 9, '您在2021-12-04打卡成功，增加<span style=\"color: red\">10</span>积分', 3, '2021-12-04 15:29:32', 1);
 COMMIT;
 
 -- ----------------------------
@@ -261,8 +225,8 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` (`id`, `email`, `nickname`, `role`, `avatar`, `password`, `isable`, `points`, `createtime`, `age`, `height`, `weight`, `sex`, `attr`, `sptime`, `status`, `regions`, `signin`, `agreeLocation`, `lat`, `lng`, `contact`) VALUES (1, NULL, '纪念1', NULL, '/profile/2021/11/18/52cfd6fa-309d-49ec-85ca-3032ca8fb40e.jpeg', NULL, 1, 50, NULL, 25, 170, NULL, '男', 'Z', NULL, '学生', '辽宁省沈阳市浑南区', 0, 0, NULL, NULL, NULL);
-INSERT INTO `user` (`id`, `email`, `nickname`, `role`, `avatar`, `password`, `isable`, `points`, `createtime`, `age`, `height`, `weight`, `sex`, `attr`, `sptime`, `status`, `regions`, `signin`, `agreeLocation`, `lat`, `lng`, `contact`) VALUES (2, NULL, '纪念2', NULL, '/profile/2021/11/18/52cfd6fa-309d-49ec-85ca-3032ca8fb40e.jpeg', NULL, 1, 50, NULL, 25, 170, NULL, '男', 'Z', NULL, '学生', '辽宁省沈阳市浑南区', 0, 0, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `email`, `nickname`, `role`, `avatar`, `password`, `isable`, `points`, `createtime`, `age`, `height`, `weight`, `sex`, `attr`, `sptime`, `status`, `regions`, `signin`, `agreeLocation`, `lat`, `lng`, `contact`) VALUES (1, NULL, '纪念1', NULL, '/profile/2021/11/18/52cfd6fa-309d-49ec-85ca-3032ca8fb40e.jpeg', NULL, 1, 50, NULL, 0, 0, NULL, '男', 'Z', NULL, '学生', '辽宁省', 0, 0, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `email`, `nickname`, `role`, `avatar`, `password`, `isable`, `points`, `createtime`, `age`, `height`, `weight`, `sex`, `attr`, `sptime`, `status`, `regions`, `signin`, `agreeLocation`, `lat`, `lng`, `contact`) VALUES (2, NULL, '纪念2', NULL, '/profile/2021/11/18/52cfd6fa-309d-49ec-85ca-3032ca8fb40e.jpeg', NULL, 1, 50, NULL, 0, 0, NULL, '男', 'Z', NULL, '学生', '辽宁省', 0, 0, NULL, NULL, NULL);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
