@@ -154,7 +154,7 @@ public class Configuration {
   // 存放Mapper的接口类
   protected final MapperRegistry mapperRegistry = new MapperRegistry(this);
 
-  // 存放插件
+  // 插件
   protected final InterceptorChain interceptorChain = new InterceptorChain();
   protected final TypeHandlerRegistry typeHandlerRegistry = new TypeHandlerRegistry(this);
 

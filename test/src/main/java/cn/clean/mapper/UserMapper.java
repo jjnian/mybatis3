@@ -14,4 +14,6 @@ public interface UserMapper {
 
 	@Select("select * from test2")
 	List<User> getUsers(RowBounds rowBounds);
+
+	Integer insertUser(User user);
 }

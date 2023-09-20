@@ -147,15 +147,22 @@ public class XMLConfigBuilder extends BaseBuilder {
       // 处理插件
       // 实例化拦截器然后加入到Configuration中
       pluginElement(root.evalNode("plugins"));
+
       objectFactoryElement(root.evalNode("objectFactory"));
       objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
       reflectorFactoryElement(root.evalNode("reflectorFactory"));
+
       settingsElement(settings);
+
       // read it after objectFactory and objectWrapperFactory issue #631
       environmentsElement(root.evalNode("environments"));
+
       databaseIdProviderElement(root.evalNode("databaseIdProvider"));
       // 处理类型处理器
+
+      // 往configuration类中的属性typeHandlerRegistry添加类型处理器
       typeHandlerElement(root.evalNode("typeHandlers"));
+
       // 解析mapper.xml文件
       mapperElement(root.evalNode("mappers"));
     } catch (Exception e) {
@@ -266,7 +273,6 @@ public class XMLConfigBuilder extends BaseBuilder {
       Properties defaults = context.getChildrenAsProperties();
       String resource = context.getStringAttribute("resource");
       String url = context.getStringAttribute("url");
-      // resource和url只能有一个
       if (resource != null && url != null) {
         throw new BuilderException(
             "The properties element cannot specify both a URL and a resource based property file reference.  Please specify one or the other.");

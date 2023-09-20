@@ -48,6 +48,7 @@ public class SqlSessionFactoryBuilder {
     try {
       // 加载并初始化XML文件
       XMLConfigBuilder parser = new XMLConfigBuilder(reader, environment, properties);
+
       // 解析XML配置文件
       return build(parser.parse());
     } catch (Exception e) {

@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class WinMain {
 	public static void main(String[] args) {
-		test3();
+		test7();
 	}
 
 	public static void test(){
@@ -129,6 +129,24 @@ public class WinMain {
 		integers.add("0");
 		CloudUser user = mapper.getSysUser4("user",integers);
 		System.out.println(user.toString());
+	}
+
+	public static void test7(){
+		Reader resourceAsReader = null;
+		try {
+			resourceAsReader = Resources.getResourceAsReader("mybatis-config1.xml");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+		SqlSessionFactory ssf = sqlSessionFactoryBuilder.build(resourceAsReader);
+		SqlSession sqlSession = ssf.openSession();
+		User user = new User();
+		user.setId(3);
+		user.setName("ji1");
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		userMapper.insertUser(user);
+		sqlSession.commit();
 	}
 
 }

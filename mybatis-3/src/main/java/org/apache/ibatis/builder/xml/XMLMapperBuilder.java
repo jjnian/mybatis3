@@ -131,6 +131,8 @@ public class XMLMapperBuilder extends BaseBuilder {
       if (namespace == null || namespace.isEmpty()) {
         throw new BuilderException("Mapper's namespace cannot be empty");
       }
+      // 记录一下正在解析的文件的namespace
+      // 在后面添加对应类会用到
       builderAssistant.setCurrentNamespace(namespace);
 
       // 解析cache-ref标签
@@ -543,7 +545,9 @@ public class XMLMapperBuilder extends BaseBuilder {
         // look at MapperAnnotationBuilder#loadXmlResource
         // 记录已经加载接口类
         configuration.addLoadedResource("namespace:" + namespace);
+
         // 存放接口类
+        // 解析添加的接口类
         configuration.addMapper(boundType);
       }
     }
